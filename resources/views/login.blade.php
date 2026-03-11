@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register</title>
+    <title>Login</title>
 </head>
 <body>
 
-    <h2>Create Account</h2>
+    <h2>Login</h2>
 
     @if(session('success'))
         <p style="color: green;">{{ session('success') }}</p>
@@ -19,11 +19,8 @@
         </ul>
     @endif
 
-    <form action="/register" method="POST">
+    <form action="/login" method="POST">
         @csrf
-
-        <label>Name:</label><br>
-        <input type="text" name="name" value="{{ old('name') }}"><br><br>
 
         <label>Email:</label><br>
         <input type="email" name="email" value="{{ old('email') }}"><br><br>
@@ -31,13 +28,10 @@
         <label>Password:</label><br>
         <input type="password" name="password"><br><br>
 
-        <label>Confirm Password:</label><br>
-        <input type="password" name="password_confirmation"><br><br>
-
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
     </form>
 
-    <p>Already have an account? <a href="/login">Login here</a></p>
+    <p>Don't have an account? <a href="/register">Register here</a></p>
 
 </body>
 </html>
