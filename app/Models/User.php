@@ -18,10 +18,18 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    'first_name',
+    'last_name',
+    'email',
+    'password',
+    'birthdate',
+    'sex',
+    'phone_number',
+    'city',
+    'barangay',
+    'street',
+    'house_no',
+];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,7 +50,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            
         ];
     }
 }
