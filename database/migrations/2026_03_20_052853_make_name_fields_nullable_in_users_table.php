@@ -17,12 +17,12 @@ return new class extends Migration
     });
     }
 
-public function down(): void
+    public function down(): void
     {
     Schema::table('users', function (Blueprint $table) {
         $table->string('first_name')->nullable(false)->change();
         $table->string('last_name')->nullable(false)->change();
     });
     }
-    
+
 };
