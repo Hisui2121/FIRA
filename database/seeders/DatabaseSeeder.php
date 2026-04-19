@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Product;
+use App\Models\ProductVariant;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,10 +18,22 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $product = Product::create([
+            'name' => 'T-Shirt',
+            'base_price' => 300
         ]);
+        
+        ProductVariant::create([
+            'product_id' => $product->id,
+            'size' => 'S',
+            'color' => 'Black',
+            'stock' => 10,
+            'price_override' => null
+        ]);
+
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }
