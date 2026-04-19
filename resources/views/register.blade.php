@@ -23,7 +23,7 @@
 
     <form action="/register" method="POST">
         @csrf                          {{-- required for security --}}
-
+        
         <label>Name:</label><br>
         <input type="text" name="name" value="{{ old('name') }}"><br><br>
 
