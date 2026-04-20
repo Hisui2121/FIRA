@@ -10,7 +10,10 @@ class RegisterController extends Controller
     // ── STEP 1 ── Show
     public function step1()
     {
-        return view('register.step1');
+        return view('auth.register.step1');
+        return view('auth.register.step2');
+        return view('auth.register.step3');
+        return view('auth.register.success');
     }
 
     // ── STEP 1 ── Store
