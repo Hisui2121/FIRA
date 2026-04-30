@@ -17,19 +17,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-        $product = Product::create([
-            'name' => 'T-Shirt',
-            'base_price' => 300
+
+        $this->call([
+            CategorySeeder::class,
+            SupplierSeeder::class,
         ]);
-        
-        ProductVariant::create([
-            'product_id' => $product->id,
-            'size' => 'S',
-            'color' => 'Black',
-            'stock' => 10,
-            'price_override' => null
-        ]);
+
+        // // User::factory(10)->create();
+        // $product = Product::create([
+        //     'name' => 'T-Shirt',
+        //     'base_price' => 300
+        // ]);
+      
+        // ProductVariant::create([
+        //     'product_id' => $product->id,
+        //     'size' => 'S',
+        //     'color' => 'Black',
+        //     'stock' => 10,
+        //     'price_override' => null
+        // ]);
 
         // User::factory()->create([
         //     'name' => 'Test User',

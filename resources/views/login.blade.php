@@ -1,3 +1,4 @@
+<x:layout>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,3 +36,4 @@
 
 </body>
 </html>
+</x:layout>

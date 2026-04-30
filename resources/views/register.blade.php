@@ -1,13 +1,18 @@
-<!DOCTYPE html>
+<x:layout>
+    <x-slot:title>
+        Register
+    </x-slot:title>
+
 <html>
-<head>
-    <title>Register</title>
-</head>
 <body>
 
-    <h2>Create Account</h2>
+<div class="hero">
+    <div class="hero-content">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="register">Create Account</h1>
 
-    @if(session('success'))
+                @if(session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif
 
@@ -34,10 +39,16 @@
         <label>Confirm Password:</label><br>
         <input type="password" name="password_confirmation"><br><br>
 
-        <button type="submit">Register</button>
+        <button type="submit" class="btn">Register</button>
     </form>
 
     <p>Already have an account? <a href="/login">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
+</x:layout>

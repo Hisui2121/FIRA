@@ -1,0 +1,176 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f6f7fb;
+    color: #111;
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* BUTTONS */
+.btn {
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    border: none;
+    background: #111;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    background: #333;
+}
+
+.btn-primary {
+    background: #f4b942;
+    color: #111;
+}
+
+.btn-primary:hover {
+    background: #e0a72e;
+}
+
+/* DASHBOARD */
+.dashboard {
+    display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 230px;
+    background: white;
+    min-height: calc(100vh - 60px);
+    padding: 20px;
+    border-right: 1px solid #eee;
+}
+
+.menu-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #888;
+}
+
+.menu-section {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #444;
+    margin-bottom: 6px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background: #f3f4f6;
+}
+
+/* ACTIVE MENU (important) */
+.sidebar a.active {
+    background: #f4b942;
+    color: #111;
+    font-weight: 600;
+}
+
+/* MAIN CONTENT */
+.main {
+    flex: 1;
+    padding: 30px;
+}
+
+/* HEADER */
+.page-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.page-header p {
+    margin: 5px 0 15px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* ALERT */
+.alert {
+    background: #ffe9e9;
+    color: #b91c1c;
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* STAT CARDS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.stat-card p {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #777;
+}
+
+/* VARIANTS (color hints like design) */
+.stat-card.success {
+    border-left: 4px solid #22c55e;
+}
+
+.stat-card.warning {
+    border-left: 4px solid #f59e0b;
+}
+
+.stat-card.neutral {
+    border-left: 4px solid #6366f1;
+}
+
+/* CARDS (for charts or tables) */
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}

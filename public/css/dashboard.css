@@ -1,0 +1,155 @@
+/* DASHBOARD CONTENT AREA */
+
+/* PAGE HEADER */
+.page-header {
+    margin-bottom: 15px;
+}
+
+.page-header h2 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.page-header p {
+    font-size: 13px;
+    color: #666;
+}
+
+/* ALERT BAR */
+.alert {
+    background: #fdecec;
+    color: #b91c1c;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alert span {
+    font-weight: 500;
+}
+
+.alert .link {
+    color: #b91c1c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* STATS GRID */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* CARD STYLE */
+.stat-card {
+    background: white;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    transition: 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+/* STAT TEXT */
+.stat-card h3 {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    font-size: 13px;
+    color: #666;
+}
+
+/* SPECIAL STATES */
+.stat-card.success h3 {
+    color: #16a34a;
+}
+
+.stat-card.warning h3 {
+    color: #e11d48;
+}
+
+.stat-card.neutral h3 {
+    color: #2563eb;
+}
+
+/* CHART SECTION */
+.charts {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+
+/* CHART CARD */
+.chart-card {
+    background: white;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.chart-card h4 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* BAR CHART (FAKE CSS GRAPH) */
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    height: 160px;
+    margin-top: 15px;
+}
+
+.bar-chart div {
+    width: 40px;
+    background: #f4b942;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.bar-chart div:hover {
+    opacity: 0.8;
+}
+
+/* PIE CHART (CSS ONLY) */
+.pie {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    margin: 20px auto;
+    background: conic-gradient(
+        #f4b942 0% 25%,
+        #4b5563 25% 50%,
+        #9ca3af 50% 75%,
+        #8b5cf6 75% 100%
+    );
+}
+
+/* RESPONSIVE (IMPORTANT) */
+@media (max-width: 1024px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}

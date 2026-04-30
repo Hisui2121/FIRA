@@ -3,32 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{isset($title) ? $title . ' - Fira' : 'Fira'}}</title> 
+    <title>{{ isset($title) ? $title . ' - Fira' : 'Fira' }}</title> 
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/layout.css">
 </head>
+
 <body>
-    <nav>
-        <div class="navbar-start">
-            <a href="/" class="brand"> Fira </a>
-        </div>
-        <div class="nav-actions">
-            <span class="text-sm"></span>
-            <form action="{{route('logout')}}" method="POST" class = "logout">
-                <button type="submit" class="btn">Logout</button>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="brand">fira.</div>
+
+    <div class="nav-right">
+
+        @auth
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button class="btn">Logout</button>
             </form>
-            <a href="/login" class="login-nav">Sign In</a>
-            <a href="{{route('register')}}" class="reg-nav">Sign up</a>
-        </div>
-    </nav>
+        @else
+            <a href="/login" class="btn">Sign In</a>
+            <a href="{{ route('register') }}" class="btn btn-primary">Sign Up</a>
+        @endauth
 
-    <main class="container">
-        {{$slot}}
-    </main>
+        <button class="icon-btn">🌙</button>
+        <div class="profile"></div>
+    </div>
+</div>
 
-    <footer>
-        <p>© 2026 Fira - Fashion Inventory Resource Assistant </p>
-    </footer>
+<!-- DASHBOARD LAYOUT -->
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="menu-title">Dashboard</div>
+
+        <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">🏠 Dashboard</a>
+        <a href="/products" class="{{ request()->is('products*') ? 'active' : '' }}">📦 Inventory</a>
+        <a href="#">👥 Suppliers</a>
+        <a href="#">📊 Reports</a>
+
+        <div class="menu-section">Support</div>
+        <a href="#">💬 Feedback</a>
+        <a href="#">⚙ Settings</a>
+        <a href="#">👤 Profile</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+        {{ $slot }}
+    </div>
+
+</div>
+
 </body>
 </html>

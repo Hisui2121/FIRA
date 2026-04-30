@@ -1,17 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
+<x-layout>
+    <x-slot:title>
+        Dashboard
+    </x-slot:title>
 
-    <h2>Welcome, {{ Auth::user()->name }}! 👋</h2>
-    <p>You are logged in.</p>
+    <div class="page-header">
+        <h2>Dashboard</h2>
+        <p>Here's your inventory at a glance.</p>
+    </div>
 
-    <form action="/logout" method="POST">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
+    @if($lowStockCount > 0)
+        <div class="alert">
+            ⚠ Low Stock Alert: <span>{{ $lowStockCount }} items below threshold</span>
+        </div>
+    @endif
 
-</body>
-</html>
+    <div class="stats">
+        <div class="stat-card">
+            <h3>{{ $totalProducts }}</h3>
+            <p>Total Products</p>
+        </div>
+
+        <div class="stat-card success">
+            <h3>{{ $totalSuppliers }}</h3>
+            <p>Suppliers</p>
+        </div>
+
+        <div class="stat-card warning">
+            <h3>{{ $lowStockCount }}</h3>
+            <p>Low Stock</p>
+        </div>
+
+        <div class="stat-card neutral">
+            <h3>{{ $totalCategories }}</h3>
+            <p>Categories</p>
+        </div>
+    </div>
+</x-layout>

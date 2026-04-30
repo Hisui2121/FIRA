@@ -10,15 +10,17 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    { 
-        Schema::create('product_variants', function(Blueprint $table){
+    {
+        Schema::create('sale_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            
-            $table->string('size');
-            $table->string('color');
-            $table->integer('stock')->default(0);
-            $table->decimal('price_override', 10, 2)-> nullable();
+
+            $table->foreignId('sale_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+
+            $table->integer('quantity');
+            $table->decimal('price', 10, 2);
+            $table->decimal('subtotal', 10, 2);
+
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_variants');
+        Schema::dropIfExists('sale_items');
     }
 };
