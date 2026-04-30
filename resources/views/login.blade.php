@@ -1,11 +1,17 @@
-<x:layout>
+<x-layout>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <x-slot:title>
+        Login
+    </x-slot:title>
 </head>
 <body>
 
+<div class="hero">
+    <div class="hero-content">
+        <div class="card">
+            <div class="card-body">
     <h2>Login</h2>
 
     @if(session('success'))
@@ -36,4 +42,4 @@
 
 </body>
 </html>
-</x:layout>
+</x-layout>

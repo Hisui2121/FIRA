@@ -18,12 +18,12 @@ class RegisterController extends Controller
             'password' => 'required|min:6|confirmed', // confirmed = needs password_confirmation field
         ]);
 
-        User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-
-        return redirect('/login')->with('success', 'Account created! Please login.');
+        
+        $user->assignRole('staff'); // default role
     }
 }

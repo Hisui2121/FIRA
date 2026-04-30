@@ -143,6 +143,10 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403);
+        }
+        
         Product::destroy($id);
         return redirect()->route('products.index')->with('success', 'Product deleted!');
     }

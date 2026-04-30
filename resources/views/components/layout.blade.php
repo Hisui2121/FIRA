@@ -37,7 +37,9 @@
 <div class="dashboard">
 
     <!-- SIDEBAR -->
+    @role('admin')
     <div class="sidebar">
+    
         <div class="menu-title">Dashboard</div>
 
         <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">🏠 Dashboard</a>
@@ -49,7 +51,9 @@
         <a href="#">💬 Feedback</a>
         <a href="#">⚙ Settings</a>
         <a href="#">👤 Profile</a>
+        
     </div>
+    @endrole
 
     <!-- MAIN CONTENT -->
     <div class="main">
