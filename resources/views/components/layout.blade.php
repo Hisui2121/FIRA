@@ -37,7 +37,7 @@
 <div class="dashboard">
 
     <!-- SIDEBAR -->
-    @role('admin')
+    @role('admin|staff')
     <div class="sidebar">
     
         <div class="menu-title">Dashboard</div>

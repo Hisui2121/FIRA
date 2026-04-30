@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\Auth\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
@@ -19,7 +19,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'store']);
 });
 
-Route::middleware('auth', 'role:admin')->group(function () {
+Route::middleware('auth', 'role:admin|staff')->group(function () {
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 

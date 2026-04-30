@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -15,7 +17,7 @@ class RegisterController extends Controller
         $request->validate([
             'name'     => 'required',
             'email'    => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed', // confirmed = needs password_confirmation field
+            'password' => 'required|min:6|confirmed',
         ]);
 
         $user = User::create([
@@ -23,7 +25,9 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-        
+       
         $user->assignRole('staff'); // default role
+
+        return redirect('/login')->with('success', 'Account created successfully! Please login.');
     }
 }
