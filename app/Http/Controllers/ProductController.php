@@ -8,59 +8,53 @@ use App\Models\ProductVariant;
 use App\Models\Category;
 use App\Models\Supplier;
 use Illuminate\Support\Str;
+use App\Models\AuditLog;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ProductController extends Controller
 {
+    use AuthorizesRequests;
+    
     public function index(Request $request)
     {
+
         $query = Product::with(['category', 'supplier', 'variants']);
 
-        // FILTER: CATEGORY
         if ($request->filled('category_id')) {
             $query->where('category_id', $request->category_id);
         }
-        //Filter Supplier
+
         if ($request->filled('supplier_id')) {
             $query->where('supplier_id', $request->supplier_id);
         }
 
         $products = $query->get();
 
-        $totalProducts = Product::count();
-        $totalSuppliers = Supplier::count();
-        $totalCategories = Category::count();
-
-        // LOW STOCK (example threshold = 10)
-        $lowStockCount = ProductVariant::where('stock', '<', 10)->count();
-
-        // FOR DROPDOWNS
-        $categories = Category::all();
-        $suppliers = Supplier::all();
-
-
-        return view('products.index', compact(
-            'products',
-            'totalProducts',
-            'totalSuppliers',
-            'totalCategories',
-            'lowStockCount',
-            'categories',
-            'suppliers'
-        ));
-        
+        return view('products.index', [
+            'products' => $products,
+            'totalProducts' => Product::count(),
+            'totalSuppliers' => Supplier::count(),
+            'totalCategories' => Category::count(),
+            'lowStockCount' => ProductVariant::where('stock', '<', 10)->count(),
+            'categories' => Category::all(),
+            'suppliers' => Supplier::all(),
+        ]);
     }
 
     public function create()
     {
-        $categories = Category::all();
-        $suppliers = Supplier::all();
-        return view('products.create', compact('categories', 'suppliers'));
+        $this->authorize('create', Product::class);
+
+        return view('products.create', [
+            'categories' => Category::all(),
+            'suppliers' => Supplier::all(),
+        ]);
 
     }
 
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
             'sku' => 'required|unique:products',
@@ -107,12 +101,18 @@ class ProductController extends Controller
                 ]);
             }
         }
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'created product',
+            'product_name' => $product->name,
+        ]);
 
         return redirect()->route('products.index')->with('success', 'Product Added!');
     }
 
     public function edit($id)
     {
+        
         $product = Product::with('variants')->findOrFail($id);
         $categories = Category::all();
         $suppliers = Supplier::all();
@@ -124,30 +124,39 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
+        $this->authorize('update', $product);
+    
         $request->validate([
             'name' => 'required',
             'sku' => 'required|unique:products,sku,' . $id,
             'price' => 'required|numeric',
         ]);
-
-        $product->update([
-            'category_id' => $request->category_id,
-            'supplier_id' => $request->supplier_id,
-            'name' => $request->name,
-            'sku' => $request->sku,
-            'price' => $request->price,
-        ]);
-
+    
+        $product->update($request->only([
+            'category_id',
+            'supplier_id',
+            'name',
+            'sku',
+            'price'
+        ]));
+    
         return redirect()->route('products.index')->with('success', 'Product updated!');
     }
 
     public function destroy($id)
     {
-        if (!auth()->user()->hasRole('admin')) {
-            abort(403);
-        }
-        
-        Product::destroy($id);
+        $product = Product::findOrFail($id);
+
+        $this->authorize('delete', $product);
+    
+        $product->delete();
+    
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'deleted product',
+            'product_name' => $product->name,
+        ]);
+    
         return redirect()->route('products.index')->with('success', 'Product deleted!');
     }
 
@@ -175,31 +184,43 @@ class ProductController extends Controller
     //  Stock In
     public function stockIn(Request $request, $id)
     {
-        $request->validate([
-            'quantity' => 'required|integer|min:1'
-        ]);
+        $request->validate(['quantity' => 'required|integer|min:1']);
 
         $variant = ProductVariant::findOrFail($id);
+    
+        $this->authorize('stock', $variant);
+    
         $variant->increment('stock', $request->quantity);
-
+    
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'stock_in',
+            'product_name' => $variant->product->name,
+            'quantity' => $request->quantity,
+        ]);
+    
         return back()->with('success', 'Stock added!');
     }
 
     // Stock Out
     public function stockOut(Request $request, $id)
     {
-        $request->validate([
-            'quantity' => 'required|integer|min:1'
-        ]);
+        $request->validate(['quantity' => 'required|integer|min:1']);
 
         $variant = ProductVariant::findOrFail($id);
-
-        if ($variant->stock < $request->quantity) {
-            return back()->with('error', 'Not enough stock!');
-        }
-
+    
+        $this->authorize('stock', $variant);
+    
         $variant->decrement('stock', $request->quantity);
-
+    
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'stock_out',
+            'product_name' => $variant->product->name,
+            'quantity' => $request->quantity,
+        ]);
+    
         return back()->with('success', 'Stock deducted!');
+
     }
 }

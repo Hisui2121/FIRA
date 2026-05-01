@@ -7,10 +7,11 @@
             <div class="card-body">
 
                 <h1 class="text-2xl font-bold mb-4">Products</h1>
-
-                <a href="{{route('products.create')}}" class="btn btn-primary mb-4">
+                @can('create', App\Models\Product::class)
+                <a href="{{ route('products.create') }}" class="btn btn-primary mb-4">
                     Add Product
-                </a> <br><br>
+                </a>
+                @endcan <br><br>
 
                 <form method="GET" class="filter-bar" style="margin-bottom:15px; display:flex; gap:10px;">
 
@@ -70,8 +71,8 @@
 
                                     <!-- STOCK IN -->
                                     <td>
-                                        <form action="/stockin/{{ $variant->id }}" method="POST">
-                                            @csrf
+                                    <form action="{{ route('products.stockin', $variant->id) }}" method="POST">
+                                        @csrf
                                             <input type="number" name="quantity" min="1" required style="width:70px;">
                                             <button type="submit">+</button>
                                         </form>
@@ -79,8 +80,8 @@
 
                                     <!-- STOCK OUT -->
                                     <td>
-                                        <form action="/stockout/{{ $variant->id }}" method="POST">
-                                            @csrf
+                                    <form action="{{ route('products.stockout', $variant->id) }}" method="POST">
+                                        @csrf
                                             <input type="number" name="quantity" min="1" required style="width:70px;">
                                             <button type="submit">-</button>
                                         </form>

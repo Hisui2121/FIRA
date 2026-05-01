@@ -11,38 +11,46 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $products = Product::with(['category', 'supplier', 'variants'])->get();
+
         $totalProducts = Product::count();
         $totalSuppliers = Supplier::count();
         $totalCategories = Category::count();
         $lowStockCount = ProductVariant::where('stock', '<', 10)->count();
-
-        $stockByCategory = Category::select('categories.name')
-        ->join('products', 'products.category_id', '=', 'categories.id')
-        ->join('product_variants', 'product_variants.product_id', '=', 'products.id')
-        ->selectRaw('SUM(product_variants.stock) as total_stock')
-        ->groupBy('categories.name')
-        ->get();
-
-        $categorySplit = Category::withCount('products')->get();
-
-        $categoryLabels = $categorySplit->pluck('name');
-        $categoryData = $categorySplit->pluck('products_count');
-
-        $stockLabels = $stockByCategory->pluck('name');
-        $stockData = $stockByCategory->pluck('total_stock');
-
-        return view('dashboard', [
-            'totalProducts' => $totalProducts,
-            'totalSuppliers' => $totalSuppliers,
-            'totalCategories' => $totalCategories,
-            'lowStockCount' => $lowStockCount,
-        
-            // ✅ REQUIRED
-            'stockLabels' => $stockLabels,
-            'stockData' => $stockData,
-        
-            'categoryLabels' => $categoryLabels,
-            'categoryData' => $categoryData,
-        ]);
+    
+        // 🟦 BAR CHART: STOCK BY CATEGORY
+        $stockByCategory = Category::with('products.variants')->get();
+    
+        $stockLabels = [];
+        $stockData = [];
+    
+        foreach ($stockByCategory as $category) {
+            $totalStock = 0;
+    
+            foreach ($category->products as $product) {
+                foreach ($product->variants as $variant) {
+                    $totalStock += $variant->stock;
+                }
+            }
+    
+            $stockLabels[] = $category->name;
+            $stockData[] = $totalStock;
+        }
+    
+        // 🟩 DONUT CHART: CATEGORY COUNT
+        $categoryLabels = Category::pluck('name');
+        $categoryData = Category::withCount('products')->pluck('products_count');
+    
+        return view('admin.dashboard', compact(
+            'products',
+            'totalProducts',
+            'totalSuppliers',
+            'totalCategories',
+            'lowStockCount',
+            'stockLabels',
+            'stockData',
+            'categoryLabels',
+            'categoryData'
+        ));
     }
 }

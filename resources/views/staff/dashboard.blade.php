@@ -108,7 +108,6 @@
                     responsive: true,
                     maintainAspectRatio: false,
 
-                    // 🔥 KEY FIX FOR LOOPING DONUT
                     resizeDelay: 300,
 
                     animation: {

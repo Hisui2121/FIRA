@@ -1,3 +1,4 @@
+<x-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,10 @@
 </head>
 <body>
 
+<div class="hero">
+    <div class="hero-content">
+        <div class="card w-full">
+            <div class="card-body">
 <h1>Add Product</h1>
 
 @if($errors->any())
@@ -121,3 +126,4 @@ function removeRow(button) {
 
 </body>
 </html>
+</x-layout>

@@ -36,14 +36,36 @@
 <!-- DASHBOARD LAYOUT -->
 <div class="dashboard">
 
-    <!-- SIDEBAR -->
-    @role('admin|staff')
-    <div class="sidebar">
-    
-        <div class="menu-title">Dashboard</div>
+   <!-- SIDEBAR -->
+@auth
+<div class="sidebar">
 
-        <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">🏠 Dashboard</a>
-        <a href="/products" class="{{ request()->is('products*') ? 'active' : '' }}">📦 Inventory</a>
+    <div class="menu-title">Dashboard</div>
+
+        {{-- ADMIN DASHBOARD --}}
+        @role('admin')
+            <a href="{{ route('admin.dashboard') }}"
+            class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                🏠 Admin Dashboard
+            </a>
+        @endrole
+
+        {{-- STAFF DASHBOARD --}}
+        @role('staff')
+            <a href="{{ route('staff.dashboard') }}"
+            class="{{ request()->is('staff/dashboard') ? 'active' : '' }}">
+                🏠 Staff Dashboard
+            </a>
+        @endrole
+
+        {{-- SHARED INVENTORY (BOTH ROLES) --}}
+        @hasanyrole('admin|staff')
+            <a href="{{ route('products.index') }}"
+            class="{{ request()->is('products*') ? 'active' : '' }}">
+                📦 Inventory
+            </a>
+        @endhasanyrole
+
         <a href="#">👥 Suppliers</a>
         <a href="#">📊 Reports</a>
 
@@ -51,9 +73,9 @@
         <a href="#">💬 Feedback</a>
         <a href="#">⚙ Settings</a>
         <a href="#">👤 Profile</a>
-        
+
     </div>
-    @endrole
+    @endauth
 
     <!-- MAIN CONTENT -->
     <div class="main">

@@ -19,10 +19,16 @@ class LoginController extends Controller
         ]);
 
         // Attempt to login
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $request->session()->regenerate();
-            return redirect('/dashboard')->with('success', 'Welcome back!');
-        }
+        if (Auth::attempt($request->only('email', 'password'))) {
+
+            $user = Auth::user();
+    
+            if ($user->hasRole('admin')) {
+                return redirect()->route('admin.dashboard');
+            }
+    
+            return redirect()->route('staff.dashboard');
+        }    
 
         return back()->withErrors(['email' => 'Invalid email or password.']);
     }
