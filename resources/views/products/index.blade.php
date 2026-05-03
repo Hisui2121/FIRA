@@ -54,6 +54,7 @@
                             <th>Stock</th>
                             <th>Stock In</th>
                             <th>Stock Out</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
 
@@ -86,6 +87,27 @@
                                             <button type="submit">-</button>
                                         </form>
                                     </td>
+                                    <td style="position:relative;">
+                                        <button onclick="toggleMenu(this)" class="btn">⋮</button>
+
+                                        <div class="menu-dropdown" style="display:none; position:absolute; right:0; background:white; border:1px solid #ccc; padding:5px; z-index:10;">
+                                            
+                                            @can('update', $product)
+                                                <a href="{{ route('products.edit', $product->id) }}">Edit</a><br>
+                                            @endcan
+
+                                            @can('delete', $product)
+                                                <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" onclick="return confirm('Delete this product?')">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            @endcan
+
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
 
@@ -97,5 +119,10 @@
         </div>
     </div>
 </div>
-
+<script>
+function toggleMenu(btn) {
+    const menu = btn.nextElementSibling;
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+</script>
 </x:layout>

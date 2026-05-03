@@ -7,6 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Staff\StaffDashboardController;
+use App\Http\Controllers\SupplierController;
+
 
 Route::middleware(['auth'])->group(function () {
 
@@ -23,9 +25,6 @@ Route::middleware(['auth'])->group(function () {
         ->name('staff.dashboard')
         ->middleware('role:staff');
 
-    // =========================
-    // SHARED INVENTORY (IMPORTANT)
-    // =========================
 
     Route::get('/products', [ProductController::class, 'index'])
         ->name('products.index');
@@ -35,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/stockout/{id}', [ProductController::class, 'stockOut'])
         ->name('products.stockout');
+
+    Route::resource('suppliers', SupplierController::class);
 
     // ADMIN ONLY ACTIONS
     Route::middleware('role:admin')->group(function () {

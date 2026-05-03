@@ -56,10 +56,6 @@
     </div>
 
     </div>
-    <pre>
-Labels: {{ json_encode($stockLabels) }}
-Data: {{ json_encode($stockData) }}
-</pre>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>

@@ -219,7 +219,7 @@ class ProductController extends Controller
             'product_name' => $variant->product->name,
             'quantity' => $request->quantity,
         ]);
-    
+   
         return back()->with('success', 'Stock deducted!');
 
     }

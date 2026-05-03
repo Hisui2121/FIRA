@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/supplier.css">
 </head>
 
 <body>
@@ -33,10 +34,8 @@
     </div>
 </div>
 
-<!-- DASHBOARD LAYOUT -->
 <div class="dashboard">
 
-   <!-- SIDEBAR -->
 @auth
 <div class="sidebar">
 
@@ -66,7 +65,7 @@
             </a>
         @endhasanyrole
 
-        <a href="#">👥 Suppliers</a>
+        <a href="{{ route('suppliers.index') }}"class="{{ request()->is('suppliers*') ? 'active' : '' }}">👥 Suppliers</a>
         <a href="#">📊 Reports</a>
 
         <div class="menu-section">Support</div>
