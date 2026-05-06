@@ -28,7 +28,13 @@ Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 // ── LOGOUT ──
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
+// ── REPORTS (protected) ──
+Route::get('/reports', function () {
+    return view('reports');
+})->middleware('auth')->name('reports');
+
 // ── DASHBOARD (protected) ──
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
+
