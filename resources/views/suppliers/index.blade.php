@@ -11,7 +11,7 @@
     @foreach($suppliers as $supplier)
 <div class="supplier-card">
 
-    <!-- 3 DOT MENU -->
+    <!-- MENU -->
     <div class="menu">
         <button onclick="toggleMenu({{ $supplier->id }})">⋮</button>
 

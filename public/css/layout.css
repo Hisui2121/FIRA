@@ -36,6 +36,7 @@ body {
     color: white;
     cursor: pointer;
     transition: 0.2s ease;
+    text-decoration: none;
 }
 
 .btn:hover {
@@ -56,15 +57,20 @@ body {
     align-items: flex-start;
 }
 
-/* SIDEBAR */
 .sidebar {
-    width: 230px;
+    width: 250px;
     background: white;
     min-height: calc(100vh - 60px);
+
     padding: 20px;
+
     border-right: 1px solid #eee;
+
+    display: flex;
+    flex-direction: column;
 }
 
+/* MENU LABELS */
 .menu-title {
     font-weight: 600;
     margin-bottom: 15px;
@@ -74,26 +80,51 @@ body {
 
 .menu-section {
     margin-top: 20px;
+    margin-bottom: 10px;
+
     font-size: 12px;
     color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
+/* SIDEBAR LINKS */
 .sidebar a {
-    display: block;
-    padding: 10px 12px;
-    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 12px 14px;
+    margin-bottom: 6px;
+
+    border-radius: 12px;
+
     text-decoration: none;
     color: #444;
-    margin-bottom: 6px;
+
     font-size: 14px;
-    transition: 0.2s;
+    font-weight: 500;
+
+    transition: all 0.2s ease;
 }
 
+/* ICONS */
+.sidebar a svg {
+    width: 18px;
+    height: 18px;
+
+    flex-shrink: 0;
+}
+
+/* HOVER */
 .sidebar a:hover {
     background: #f3f4f6;
+    color: #111;
 }
 
-/* ACTIVE MENU (important) */
+/* ACTIVE */
 .sidebar a.active {
     background: #f4b942;
     color: #111;
@@ -156,7 +187,7 @@ body {
     color: #777;
 }
 
-/* VARIANTS (color hints like design) */
+/* VARIANTS  */
 .stat-card.success {
     border-left: 4px solid #22c55e;
 }
@@ -169,13 +200,6 @@ body {
     border-left: 4px solid #6366f1;
 }
 
-/* CARDS (for charts or tables) */
-.card {
-    background: white;
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-}
 
 canvas {
     margin-top: 15px;

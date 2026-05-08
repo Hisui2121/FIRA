@@ -41,8 +41,14 @@ class SupplierController extends Controller
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('suppliers', 'public');
         }
-    
+        
         Supplier::create($data);
+        
+        AuditHelper::log(
+            'CREATE',
+            'Suppliers',
+            'Added supplier: ' . $supplier->name
+        );
     
         return redirect()->route('suppliers.index');
     }

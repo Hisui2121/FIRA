@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\AuditLogController;
 
 
 Route::middleware(['auth'])->group(function () {
@@ -29,13 +30,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products', [ProductController::class, 'index'])
         ->name('products.index');
 
-    Route::post('/stockin/{id}', [ProductController::class, 'stockIn'])
+    Route::post('/stockin/{variant}', [ProductController::class, 'stockIn'])
         ->name('products.stockin');
 
     Route::post('/stockout/{id}', [ProductController::class, 'stockOut'])
         ->name('products.stockout');
 
     Route::resource('suppliers', SupplierController::class);
+
+    Route::get('/profile', function () {
+        return view('profile');
+    })->middleware('auth')->name('profile');
 
     // ADMIN ONLY ACTIONS
     Route::middleware('role:admin')->group(function () {
@@ -54,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::delete('/products/{product}', [ProductController::class, 'destroy'])
             ->name('products.destroy');
+
+        Route::get('/audit-logs', [AuditLogController::class, 'index'])
+        ->name('audit.logs');
     });
 
     Route::post('/logout', [LoginController::class, 'destroy'])

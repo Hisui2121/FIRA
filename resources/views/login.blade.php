@@ -1,45 +1,93 @@
 <x-layout>
-<!DOCTYPE html>
-<html>
-<head>
-    <x-slot:title>
-        Login
-    </x-slot:title>
-</head>
-<body>
 
-<div class="hero">
-    <div class="hero-content">
-        <div class="card">
-            <div class="card-body">
-    <h2>Login</h2>
+<x-slot:title>
+    Login
+</x-slot:title>
 
-    @if(session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+<div class="login-page">
 
-    @if($errors->any())
-        <ul style="color: red;">
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+    <!-- THIS FOR LEFT SIDE -->
+    <div class="login-left">
 
-    <form action="/login" method="POST">
-        @csrf
+        <!-- PLACEHOLDER -->
+        <div class="login-image">
+            <img src="/images/login-placeholder.png" alt="Login Image">
+        </div>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" value="{{ old('email') }}"><br><br>
+    </div>
 
-        <label>Password:</label><br>
-        <input type="password" name="password"><br><br>
+    <!-- THIS FOR RIGHT SIDE -->
+    <div class="login-right">
 
-        <button type="submit">Login</button>
-    </form>
+        <div class="login-card">
 
-    <p>Don't have an account? <a href="/register">Register here</a></p>
+            <h1>Sign in</h1>
+            <p class="subtitle">
+                Welcome back. Access your inventory dashboard.
+            </p>
 
-</body>
-</html>
+            @if(session('success'))
+                <p class="success-message">
+                    {{ session('success') }}
+                </p>
+            @endif
+
+            @if($errors->any())
+                <div class="error-box">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="/login" method="POST">
+                @csrf
+
+                <div class="form-group">
+                    <label>EMAIL ADDRESS</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        placeholder="Enter your email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>PASSWORD</label>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                    >
+                </div>
+
+                <div class="form-options">
+                    <label class="remember">
+                        <input type="checkbox">
+                        Keep me logged in
+                    </label>
+
+                    <a href="#">Forgot your password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    Sign in
+                </button>
+
+            </form>
+
+            <p class="register-text">
+                Don’t have an account?
+                <a href="/register">Sign up</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
 </x-layout>

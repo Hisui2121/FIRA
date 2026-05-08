@@ -1,77 +1,136 @@
-/* HERO SECTION */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fa;
+    color: #222;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
 .hero {
     min-height: calc(100vh - 6rem);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: 2rem;
 }
 
 .hero-content {
+    width: 100%;
+    max-width: 900px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 900px;
+
+    gap: 1.2rem;
 }
 
 /* HEADLINE */
 .hero h1 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
+    line-height: 1.2;
 }
 
 .hero h1 span {
-    color: #f4b942; /* yellow highlight */
+    color: #f4b942;
 }
 
 /* SUBTEXT */
 .hero p {
-    margin-top: 1rem;
     color: #666;
-    font-size: 0.95rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    max-width: 700px;
+    line-height: 1.6;
 }
 
 /* BUTTONS */
 .hero .actions {
-    margin-top: 1.5rem;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
+    width: fit-content;
 }
 
-/* CARD */
+/* =========================
+   CARD
+========================= */
 .card {
     width: 100%;
-    max-width: 1100px;
-    background-color: white;
+    max-width: 1200px;
+
+    background: #fff;
+
     padding: 1.5rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-radius: 18px;
+
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+
+    overflow-x: auto;
+
+    transition: 0.3s ease;
+    
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .card-body {
-    padding: 1rem;
+    width: 100%;
+    overflow-x: auto;
+    line-height: 1.6;
+    color: #1a1a1a;
 }
 
-/* TABLE */
+/* =========================
+   TABLE
+========================= */
 table {
-    border-collapse: collapse;
     width: 100%;
-    border-radius: 12px;
+    border-collapse: collapse;
+    min-width: 700px;
+
     overflow: hidden;
+    border-radius: 12px;
 }
 
 th {
     background: #f9fafb;
     text-align: left;
-    padding: 12px;
+
+    padding: 14px;
     font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
 }
 
 td {
-    padding: 12px;
+    padding: 14px;
     border-top: 1px solid #eee;
     font-size: 14px;
+
+    white-space: nowrap;
+}
+
+tr {
+    transition: 0.2s ease;
 }
 
 tr:hover {

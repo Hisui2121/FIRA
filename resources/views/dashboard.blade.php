@@ -64,7 +64,6 @@
         console.log("Dashboard chart script executed");
         document.addEventListener("DOMContentLoaded", () => {
 
-        // prevent double execution (THIS IS KEY)
         if (window.__dashboardChartsLoaded) return;
         window.__dashboardChartsLoaded = true;
 
@@ -75,7 +74,7 @@
         if (window.barChartInstance) window.barChartInstance.destroy();
         if (window.donutChartInstance) window.donutChartInstance.destroy();
 
-        // wait 1 frame so layout fully stabilizes
+
         requestAnimationFrame(() => {
 
             window.barChartInstance = new Chart(barCanvas, {
@@ -108,7 +107,6 @@
                     responsive: true,
                     maintainAspectRatio: false,
 
-                    // 🔥 KEY FIX FOR LOOPING DONUT
                     resizeDelay: 300,
 
                     animation: {

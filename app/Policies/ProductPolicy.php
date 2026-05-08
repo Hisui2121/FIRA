@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Product;
+use App\Models\ProductVariant;
 
 class ProductPolicy
 {
@@ -34,9 +35,4 @@ class ProductPolicy
         return $user->hasRole('admin');
     }
 
-    // STOCK ACTIONS (ADMIN + STAFF)
-    public function stock(User $user)
-    {
-        return $user->hasAnyRole(['admin', 'staff']);
-    }
 }

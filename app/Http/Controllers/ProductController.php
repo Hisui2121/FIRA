@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\AuditLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\Helpers\AuditHelper;
 
 class ProductController extends Controller
 {
@@ -101,11 +102,11 @@ class ProductController extends Controller
                 ]);
             }
         }
-        AuditLog::create([
-            'user_id' => Auth::id(),
-            'action' => 'created product',
-            'product_name' => $product->name,
-        ]);
+        AuditHelper::log(
+            'CREATE',
+            'Products',
+            'Added product: ' . $product->name
+        );
 
         return redirect()->route('products.index')->with('success', 'Product Added!');
     }
@@ -139,6 +140,12 @@ class ProductController extends Controller
             'sku',
             'price'
         ]));
+
+        AuditHelper::log(
+            'UPDATE',
+            'Products',
+            'Updated product: ' . $product->name
+        );
     
         return redirect()->route('products.index')->with('success', 'Product updated!');
     }
@@ -151,11 +158,11 @@ class ProductController extends Controller
     
         $product->delete();
     
-        AuditLog::create([
-            'user_id' => Auth::id(),
-            'action' => 'deleted product',
-            'product_name' => $product->name,
-        ]);
+        AuditHelper::log(
+            'DELETE',
+            'Products',
+            'Deleted product ID: ' . $id
+        );
     
         return redirect()->route('products.index')->with('success', 'Product deleted!');
     }
@@ -182,23 +189,21 @@ class ProductController extends Controller
     }
 
     //  Stock In
-    public function stockIn(Request $request, $id)
+    public function stockIn(Request $request, ProductVariant $variant)
     {
         $request->validate(['quantity' => 'required|integer|min:1']);
-
-        $variant = ProductVariant::findOrFail($id);
     
         $this->authorize('stock', $variant);
     
         $variant->increment('stock', $request->quantity);
-    
-        AuditLog::create([
-            'user_id' => Auth::id(),
-            'action' => 'stock_in',
-            'product_name' => $variant->product->name,
-            'quantity' => $request->quantity,
-        ]);
-    
+        
+        AuditHelper::log(
+            'STOCK IN',
+            'Inventory',
+            'Added ' . $request->quantity .
+            ' stocks to variant SKU: ' . $variant->sku
+        );
+   
         return back()->with('success', 'Stock added!');
     }
 
@@ -213,12 +218,12 @@ class ProductController extends Controller
     
         $variant->decrement('stock', $request->quantity);
     
-        AuditLog::create([
-            'user_id' => Auth::id(),
-            'action' => 'stock_out',
-            'product_name' => $variant->product->name,
-            'quantity' => $request->quantity,
-        ]);
+        AuditHelper::log(
+            'STOCK OUT',
+            'Inventory',
+            'Deducted ' . $request->quantity .
+            ' stocks from SKU: ' . $variant->sku
+        );
    
         return back()->with('success', 'Stock deducted!');
 

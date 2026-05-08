@@ -15,6 +15,42 @@
     color: #666;
 }
 
+.audit-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.audit-table th {
+    background: #f9fafb;
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.audit-table td {
+    padding: 14px;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 14px;
+}
+
+.audit-table tr:hover {
+    background: #fafafa;
+}
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-action {
+    background: #111827;
+    color: white;
+}
+
 /* ALERT BAR */
 .alert {
     background: #fdecec;

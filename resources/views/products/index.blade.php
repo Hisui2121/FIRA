@@ -6,7 +6,7 @@
         <div class="card w-full">
             <div class="card-body">
 
-                <h1 class="text-2xl font-bold mb-4">Products</h1>
+                <h1 class="text-2xl font-bold mb-4">Fashion Inventory</h1> <br>
                 @can('create', App\Models\Product::class)
                 <a href="{{ route('products.create') }}" class="btn btn-primary mb-4">
                     Add Product
@@ -90,22 +90,24 @@
                                     <td style="position:relative;">
                                         <button onclick="toggleMenu(this)" class="btn">⋮</button>
 
-                                        <div class="menu-dropdown" style="display:none; position:absolute; right:0; background:white; border:1px solid #ccc; padding:5px; z-index:10;">
+                                        <div class="menu-dropdown" style="display:none; position:absolute; right:0; background:white; border:1px solid #ccc; z-index:10;">
+                                            <div class="dropdown">
                                             
                                             @can('update', $product)
-                                                <a href="{{ route('products.edit', $product->id) }}">Edit</a><br>
+                                                <a href="{{ route('products.edit', $product->id) }}" class="dropdown-items">Edit</a><br>
                                             @endcan
 
                                             @can('delete', $product)
                                                 <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" onclick="return confirm('Delete this product?')">
+                                                    <button type="submit" onclick="return confirm('Delete this product?')" class="">
                                                         Delete
                                                     </button>
                                                 </form>
                                             @endcan
 
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

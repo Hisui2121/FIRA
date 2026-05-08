@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use App\Policies\ProductPolicy;
+use App\Policies\ProductVariantPolicy;
 use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,5 +25,7 @@ class AppServiceProvider extends ServiceProvider
         
     public function boot(): void
     {
+        Gate::policy(Product::class, ProductPolicy::class);
+        Gate::policy(ProductVariant::class, ProductVariantPolicy::class);
     }
 }

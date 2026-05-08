@@ -1,0 +1,162 @@
+/* =========================
+   PROFILE PAGE
+========================= */
+
+.profile-container {
+    width: 100%;
+    max-width: 900px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1.5rem;
+}
+
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile-card {
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 2rem;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+
+    display: flex;
+    align-items: center;
+
+    gap: 1.5rem;
+}
+
+/* AVATAR */
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    background: #f4b942;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2.5rem;
+    font-weight: 700;
+
+    color: #111;
+}
+
+/* INFO */
+.profile-info h2 {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+}
+
+.profile-info p {
+    color: #777;
+    margin-bottom: 0.8rem;
+}
+
+/* ROLE */
+.role-badge {
+    display: inline-block;
+
+    background: #fff4d6;
+
+    color: #8a6500;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-transform: capitalize;
+}
+
+/* =========================
+   DETAILS
+========================= */
+
+.profile-details {
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 2rem;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+.details-header {
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    margin-bottom: 1.5rem;
+}
+
+/* GRID */
+.details-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 1.5rem;
+}
+
+/* ITEM */
+.detail-item {
+    background: #fafafa;
+
+    padding: 1.2rem;
+
+    border-radius: 16px;
+}
+
+.detail-item span {
+    display: block;
+
+    font-size: 13px;
+    color: #888;
+
+    margin-bottom: 0.5rem;
+}
+
+.detail-item strong {
+    font-size: 15px;
+    color: #222;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+
+}

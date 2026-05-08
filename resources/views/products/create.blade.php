@@ -1,129 +1,328 @@
 <x-layout>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product</title>
-</head>
-<body>
+
+<x-slot:title>
+    Add Product
+</x-slot:title>
 
 <div class="hero">
-    <div class="hero-content">
-        <div class="card w-full">
-            <div class="card-body">
-<h1>Add Product</h1>
 
-@if($errors->any())
-    <ul style="color:red;">
-        @foreach($errors->all() as $error)
-            <li>{{$error}}</li>
-        @endforeach
-    </ul>
-@endif
+    <div class="form-container">
 
-<form action="{{route('products.store')}}" method="POST">
-    @csrf
+        <!-- HEADER -->
+        <div class="form-header">
+            <h2>Add Product</h2>
+            <p>
+                Input the details for your new product,
+                including inventory variants and supplier information.
+            </p>
+        </div>
 
-    <label>Category:</label>
-    <select name="category_id" required>
-        <option value="">-- Select Category --</option>
+        <!-- ERRORS -->
+        @if($errors->any())
+            <div class="error-box">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}">
-                {{ $category->name }}
-            </option>
-        @endforeach
-    </select>
-    <input type="text" name="new_category" placeholder="Or create new category">
-    <br><br>
+        <!-- FORM -->
+        <form
+            action="{{ route('products.store') }}"
+            method="POST"
+            class="dashboard-form"
+        >
 
-    <label>Name:</label>
-    <input type="text" name="name" required><br><br>
+            @csrf
 
-    <label>SKU:</label>
-    <input type="text" name="sku" required placeholder="e.g. TS-001"><br><br>
+            <!-- PRODUCT INFORMATION -->
+            <div class="form-section">
+                Product Information
+            </div>
 
-    <label>Base Price:</label>
-    <input type="number" step="0.01" name="price" required><br><br>
+            <div class="form-grid">
 
-    <label>Description:</label>
-    <textarea name="description" cols="30" rows="4"></textarea><br><br>
+                <div class="form-group">
+                    <label>Category</label>
 
-    <label>Supplier:</label>
-    <select name="supplier_id" required>
-        <option value="">-- Select Supplier --</option>
+                    <select name="category_id" required>
+                        <option value="">
+                            -- Select Category --
+                        </option>
 
-        @foreach($suppliers as $supplier)
-            <option value="{{ $supplier->id }}">
-                {{ $supplier->name }}
-            </option>
-        @endforeach
-    </select>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-<br><br>
+                <div class="form-group">
+                    <label>New Category (Optional)</label>
 
-    <!-- 🔥 VARIANT TABLE -->
-    <h3>Variants (Inventory)</h3>
+                    <input
+                        type="text"
+                        name="new_category"
+                        placeholder="Create new category"
+                    >
+                </div>
 
-    <table border="1" cellpadding="10">
-        <thead>
-            <tr>
-                <th>Size</th>
-                <th>Color</th>
-                <th>Stock</th>
-                <th>Price Override</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+            </div>
 
-        <tbody id="variantTable">
-            <tr>
-                <td><input type="text" name="variants[0][size]" required></td>
-                <td><input type="text" name="variants[0][color]" required></td>
-                <td><input type="number" name="variants[0][stock]" min="0" required></td>
-                <td><input type="number" step="0.01" name="variants[0][price_override]"></td>
-                <td><button type="button" onclick="removeRow(this)">Remove</button></td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="form-grid">
 
-    <br>
-    <button type="button" onclick="addRow()">+ Add Variant</button>
+                <div class="form-group">
+                    <label>Product Name</label>
 
-    <br><br>
-    <button type="submit">Add Product</button>
-</form>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter product name"
+                        required
+                    >
+                </div>
 
-<br>
-<a href="{{route('products.index')}}">Back to Catalog</a>
+                <div class="form-group">
+                    <label>SKU</label>
 
-<!-- 🔥 SIMPLE JS FOR DYNAMIC ROWS -->
+                    <input
+                        type="text"
+                        name="sku"
+                        placeholder="e.g. TS-001"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Base Price</label>
+
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="price"
+                        placeholder="0.00"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Supplier</label>
+
+                    <select name="supplier_id" required>
+                        <option value="">
+                            -- Select Supplier --
+                        </option>
+
+                        @foreach($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}">
+                                {{ $supplier->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    rows="4"
+                    placeholder="Enter product description"
+                ></textarea>
+            </div>
+
+            <!-- VARIANTS -->
+            <div class="form-section">
+                Product Variants
+            </div>
+
+            <div class="variant-container">
+
+                <table class="variant-table">
+
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Color</th>
+                            <th>Stock</th>
+                            <th>Price Override</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="variantTable">
+
+                        <tr>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    name="variants[0][size]"
+                                    placeholder="Medium"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    name="variants[0][color]"
+                                    placeholder="Black"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    name="variants[0][stock]"
+                                    min="0"
+                                    placeholder="0"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    name="variants[0][price_override]"
+                                    placeholder="Optional"
+                                >
+                            </td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="remove-btn"
+                                    onclick="removeRow(this)"
+                                >
+                                    Remove
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- ADD BUTTON -->
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="addRow()"
+            >
+                + Add Variant
+            </button>
+
+            <!-- ACTIONS -->
+            <div class="form-actions">
+
+                <a
+                    href="{{ route('products.index') }}"
+                    class="btn-secondary"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    Add Product
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- JS -->
 <script>
+
 let index = 1;
 
 function addRow() {
+
     let table = document.getElementById('variantTable');
 
     let row = `
         <tr>
-            <td><input type="text" name="variants[${index}][size]" required></td>
-            <td><input type="text" name="variants[${index}][color]" required></td>
-            <td><input type="number" name="variants[${index}][stock]" min="0" required></td>
-            <td><input type="number" step="0.01" name="variants[${index}][price_override]"></td>
-            <td><button type="button" onclick="removeRow(this)">Remove</button></td>
+
+            <td>
+                <input
+                    type="text"
+                    name="variants[${index}][size]"
+                    placeholder="Size"
+                    required
+                >
+            </td>
+
+            <td>
+                <input
+                    type="text"
+                    name="variants[${index}][color]"
+                    placeholder="Color"
+                    required
+                >
+            </td>
+
+            <td>
+                <input
+                    type="number"
+                    name="variants[${index}][stock]"
+                    min="0"
+                    placeholder="0"
+                    required
+                >
+            </td>
+
+            <td>
+                <input
+                    type="number"
+                    step="0.01"
+                    name="variants[${index}][price_override]"
+                    placeholder="Optional"
+                >
+            </td>
+
+            <td>
+                <button
+                    type="button"
+                    class="remove-btn"
+                    onclick="removeRow(this)"
+                >
+                    Remove
+                </button>
+            </td>
+
         </tr>
     `;
 
     table.insertAdjacentHTML('beforeend', row);
+
     index++;
 }
 
 function removeRow(button) {
     button.closest('tr').remove();
 }
+
 </script>
 
-</body>
-</html>
 </x-layout>

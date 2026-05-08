@@ -9,11 +9,13 @@ class AuditLog extends Model
     protected $fillable = [
         'user_id',
         'action',
-        'product_name',
-        'quantity'
+        'module',
+        'description',
+        'ip_address'
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
