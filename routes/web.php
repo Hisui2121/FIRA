@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuditLogController;
+use App\Http\Controllers\ReportController;
 
 
 Route::middleware(['auth'])->group(function () {
@@ -72,6 +73,8 @@ Route::get('/', function () {
     return view('/login');
 });
 
+
+
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
@@ -79,6 +82,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 });
+
+Route::get('/reports', [ReportController::class, 'index'])
+    ->name('reports');
 
 
 

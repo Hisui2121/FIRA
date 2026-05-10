@@ -5,26 +5,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void
+    public function up()
     {
+    if (!Schema::hasTable('audit_logs')) {
         Schema::create('audit_logs', function (Blueprint $table) {
-
             $table->id();
-
-            $table->foreignId('user_id')
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
-
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->string('action');
             $table->string('module');
-
             $table->text('description');
-
             $table->string('ip_address')->nullable();
-
             $table->timestamps();
         });
+    }
     }
 
     public function down(): void
