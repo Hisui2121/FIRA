@@ -9,11 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
+    if (!Schema::hasColumn('suppliers', 'logo')) {
         Schema::table('suppliers', function (Blueprint $table) {
             $table->string('logo')->nullable()->after('address');
         });
+    }
     }
 
     /**
