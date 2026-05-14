@@ -8,10 +8,10 @@
     display: block;
     padding: 20px;
     border-radius: 12px;
-    background: #1e1e2f;
+    background: var(--surface);
     text-align: center;
     text-decoration: none;
-    color: white;
+    color: var(--text);
     transition: 0.2s;
 }
 
@@ -59,7 +59,8 @@
     position: absolute;
     right: 0;
     top: 25px;
-    background: #2a2a3d;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border);
     border-radius: 8px;
     padding: 10px;
     display: flex;

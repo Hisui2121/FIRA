@@ -9,7 +9,51 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuditLogController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
+Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    Route::resource('users', UserController::class);
+    Route::get('/users', [UserController::class, 'index'])
+    ->name('users.index');
+
+});
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/account', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::put('/account', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+});
+
+Route::middleware(['auth'])->prefix('settings')->group(function () {
+
+    Route::get('/', [SettingsController::class, 'index'])
+        ->name('settings.index');
+
+    Route::get('/appearance', [SettingsController::class, 'appearance'])
+        ->name('settings.appearance');
+
+    Route::put('/appearance', [SettingsController::class, 'updateAppearance'])
+        ->name('settings.appearance.update');
+
+    Route::get('/security', [SettingsController::class, 'security'])
+        ->name('settings.security');
+
+    Route::get('/preferences', [SettingsController::class, 'preferences'])
+        ->name('settings.preferences');
+
+    Route::get('/account', [SettingsController::class, 'account'])
+        ->name('settings.account');
+
+    Route::get('/system', [SettingsController::class, 'system'])
+        ->name('settings.system');
+});
 
 Route::middleware(['auth'])->group(function () {
 

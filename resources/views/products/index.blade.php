@@ -1,4 +1,4 @@
-<x:layout>
+<x-layout>
 <x-slot:title>Products Catalog</x-slot:title>
 
 <div class="hero">
@@ -40,22 +40,71 @@
                 <button type="submit" class="btn">Filter</button>
                 <a href="/products" class="btn">Reset</a>
                 
-
             </form> <br><br>
+            <div class="table-controls">
 
-                <table border="1" cellpadding="10" width="100%">
-                    <thead>
-                        <tr>
-                            <th>SKU</th>
-                            <th>Product</th>
-                            <th>Size</th>
-                            <th>Color</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Stock In</th>
-                            <th>Stock Out</th>
-                            <th>Actions</th>
-                        </tr>
+                <button onclick="zoomOut()">-</button>
+
+                <span id="zoomLevel">100%</span>
+
+                <button onclick="zoomIn()">+</button>
+
+            </div>
+
+            <div class="table-wrapper">
+
+            <div id="zoomTable" class="zoom-container">
+
+                <table class="spreadsheet-table">
+                <thead>
+                    <tr>
+
+                        <th>
+                            SKU
+                            <div class="resize-handle"></div>
+                        </th>
+
+                        <th>
+                            Product
+                            <div class="resize-handle"></div>
+                        </th>
+
+                        <th>
+                            Size
+                            <div class="resize-handle"></div>
+                        </th>
+
+                        <th>
+                            Color
+                            <div class="resize-handle"></div>
+                        </th>
+
+                        <th>
+                            Price
+                            <div class="resize-handle"></div>
+                        </th>
+
+                        <th>
+                            Stock
+                            <div class="resize-handle"></div>
+                        </th>
+
+                        <th>
+                            Stock In
+                            <div class="resize-handle"></div>
+                        </th>
+
+                        <th>
+                            Stock Out
+                            <div class="resize-handle"></div>
+                        </th>
+
+                        <th>
+                            Actions
+                            <div class="resize-handle"></div>
+                        </th>
+
+                    </tr>
                     </thead>
 
                     <tbody>
@@ -67,7 +116,7 @@
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $variant->size }}</td>
                                     <td>{{ $variant->color }}</td>
-                                    <td>${{ number_format($variant->actualPrice(), 2) }}</td>
+                                    <td>{{ number_format($variant->actualPrice(), 2) }}</td>
                                     <td>{{ $variant->stock }}</td>
 
                                     <!-- STOCK IN -->
@@ -116,6 +165,9 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+            </div>
+                
 
             </div>
         </div>
@@ -127,4 +179,70 @@ function toggleMenu(btn) {
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 </script>
-</x:layout>
+
+<script>
+document.querySelectorAll(".resize-handle").forEach(handle => {
+
+    let startX;
+    let startWidth;
+
+    handle.addEventListener("mousedown", function(e) {
+
+        startX = e.pageX;
+
+        const th = handle.parentElement;
+
+        startWidth = th.offsetWidth;
+
+        function mouseMove(e) {
+
+            const newWidth = startWidth + (e.pageX - startX);
+
+            th.style.width = newWidth + "px";
+        }
+
+        function mouseUp() {
+            document.removeEventListener("mousemove", mouseMove);
+            document.removeEventListener("mouseup", mouseUp);
+        }
+
+        document.addEventListener("mousemove", mouseMove);
+        document.addEventListener("mouseup", mouseUp);
+
+    });
+
+});
+</script>
+<script>
+
+let zoom = 1;
+
+function updateZoom() {
+
+    const table = document.getElementById("zoomTable");
+
+    table.style.transform = `scale(${zoom})`;
+
+    document.getElementById("zoomLevel").innerText =
+        Math.round(zoom * 100) + "%";
+}
+
+function zoomIn() {
+
+    zoom += 0.1;
+
+    updateZoom();
+}
+
+function zoomOut() {
+
+    if (zoom > 0.5) {
+
+        zoom -= 0.1;
+
+        updateZoom();
+    }
+}
+
+</script>
+</x-layout>

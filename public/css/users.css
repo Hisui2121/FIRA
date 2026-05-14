@@ -1,0 +1,176 @@
+.users-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* HEADER */
+
+.users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.users-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+}
+
+.users-header p {
+    color: var(--text-muted);
+}
+
+/* TOOLBAR */
+
+.users-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.users-filter {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.users-filter input,
+.users-filter select {
+    padding: 12px 14px;
+
+    border-radius: 14px;
+
+    border: 1px solid var(--border);
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    min-width: 220px;
+}
+
+/* TABLE CARD */
+
+.users-table-card {
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow);
+}
+
+/* TABLE */
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-table th {
+    text-align: left;
+
+    padding: 18px;
+
+    background: var(--surface-hover);
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+}
+
+.users-table td {
+    padding: 18px;
+
+    border-top: 1px solid var(--border);
+}
+
+/* USER CELL */
+
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-avatar {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 50%;
+
+    background: rgba(244,185,66,0.15);
+
+    color: var(--primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+}
+
+.user-cell p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* ROLE */
+
+.role-pill {
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    background: rgba(244,185,66,0.15);
+
+    color: #c98b00;
+
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* STATUS */
+
+.status-active {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+/* ACTIONS */
+
+.table-actions {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.btn-sm {
+    padding: 8px 14px;
+
+    border-radius: 10px;
+
+    background: var(--surface-hover);
+
+    color: var(--text);
+
+    text-decoration: none;
+
+    border: 1px solid var(--border);
+
+    cursor: pointer;
+}
+
+.danger-btn {
+    color: #ef4444;
+}
+
+/* PAGINATION */
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}

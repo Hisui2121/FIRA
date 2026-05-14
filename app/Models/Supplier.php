@@ -13,7 +13,7 @@ class Supplier extends Model
         'address',
         'logo'
     ];
-   
+  
     public function products()
     {
         return $this->hasMany(Product::class);

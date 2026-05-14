@@ -18,25 +18,25 @@
 .audit-table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: var(--surface);
 }
 
 .audit-table th {
-    background: #f9fafb;
+    background: var(--surface-secondary);
+    border-bottom: 1px solid var(--border);
     padding: 14px;
     text-align: left;
-    border-bottom: 1px solid #eee;
     font-size: 14px;
 }
 
 .audit-table td {
     padding: 14px;
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid var(--border);
     font-size: 14px;
 }
 
 .audit-table tr:hover {
-    background: #fafafa;
+    background: var(--surface-hover);
 }
 
 .badge {
@@ -47,8 +47,8 @@
 }
 
 .badge-action {
-    background: #111827;
-    color: white;
+    background: var(--surface-hover);
+    color: var(--text);
 }
 
 /* ALERT BAR */
@@ -160,7 +160,7 @@ canvas {
     margin-bottom: 10px;
 }
 
-/* BAR CHART (FAKE CSS GRAPH) */
+/* BAR CHART */
 .bar-chart {
     display: flex;
     align-items: flex-end;
@@ -199,7 +199,7 @@ canvas {
     will-change: transform;
 }
 
-/* RESPONSIVE (IMPORTANT) */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
     .stats {
         grid-template-columns: repeat(2, 1fr);

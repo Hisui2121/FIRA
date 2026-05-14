@@ -5,29 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Supplier;
+use App\Helpers\AuditHelper;
 
 class SupplierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $suppliers = Supplier::all();
         return view('suppliers.index', compact('suppliers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('suppliers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -43,37 +35,28 @@ class SupplierController extends Controller
         }
         
         Supplier::create($data);
-        
+       
         AuditHelper::log(
             'CREATE',
             'Suppliers',
             'Added supplier: ' . $supplier->name
         );
-    
+   
         return redirect()->route('suppliers.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Supplier $supplier)
     {
         return view('suppliers.show', compact('supplier'));
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Supplier $supplier)
     {
         return view('suppliers.edit', compact('supplier'));
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Supplier $supplier)
     {
         $data = $request->validate([
@@ -96,6 +79,13 @@ class SupplierController extends Controller
         }
     
         $supplier->update($data);
+
+
+        AuditHelper::log(
+            'UPDATE',
+            'Suppliers',
+            'Edited supplier: ' . $supplier->name
+        );
     
         return redirect()->route('suppliers.show', $supplier)
             ->with('success', 'Supplier updated successfully.');

@@ -160,9 +160,7 @@
                     </thead>
 
                     <tbody id="variantTable">
-
                         <tr>
-
                             <td>
                                 <input
                                     type="text"
