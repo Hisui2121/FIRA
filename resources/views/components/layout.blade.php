@@ -12,8 +12,12 @@
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href= "/css/form.css">
     <link rel="stylesheet" href="/css/profile.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="/css/settings.css">
     <link rel="stylesheet" href="{{ asset('css/users.css') }}">
+=======
+    <link rel="stylesheet" href="/css/register.css">
+>>>>>>> LoginRegisterUI
 </head>
 
 <body class="{{ auth()->user()?->setting?->theme === 'dark' ? 'dark-mode' : '' }}">
