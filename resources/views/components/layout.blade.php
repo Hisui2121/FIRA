@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href= "/css/form.css">
     <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/register.css">
 </head>
 
 <body>
