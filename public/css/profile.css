@@ -334,3 +334,242 @@
         flex-direction: column;
     }
 }
+
+.profile-actions-modern {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 1rem;
+}
+
+/* Modal for Profile and Cover */
+.modal-overlay {
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(15,23,42,0.45);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.25s ease;
+
+    z-index: 9999;
+
+    padding: 2rem;
+}
+
+.modal-overlay.active {
+
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =========================
+   MODAL BOX
+========================= */
+
+.modern-modal {
+
+    width: 100%;
+    max-width: 520px;
+
+    background: var(--surface);
+
+    border-radius: 28px;
+
+    border: 1px solid var(--border);
+
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+
+    padding: 2rem;
+
+    transform: translateY(20px) scale(0.98);
+
+    transition: 0.25s ease;
+}
+
+.modal-overlay.active .modern-modal {
+
+    transform: translateY(0) scale(1);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.modal-header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 2rem;
+}
+
+.modal-header h3 {
+
+    font-size: 1.4rem;
+    color: var(--text);
+}
+
+.modal-close {
+
+    border: none;
+    background: var(--surface-hover);
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    color: var(--text);
+
+    font-size: 1rem;
+
+    transition: 0.2s ease;
+}
+
+.modal-close:hover {
+
+    background: var(--primary);
+}
+
+/* =========================
+   PREVIEW
+========================= */
+
+.upload-preview {
+
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 2rem;
+}
+
+.preview-avatar,
+.placeholder-avatar {
+
+    width: 140px;
+    height: 140px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    background: var(--surface-hover);
+
+    border: 4px solid var(--border);
+}
+
+.placeholder-avatar {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 3rem;
+    font-weight: 700;
+
+    color: var(--primary);
+}
+
+/* =========================
+   COVER PREVIEW
+========================= */
+
+.cover-preview-box {
+
+    width: 100%;
+    height: 180px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    background: var(--surface-hover);
+
+    margin-bottom: 2rem;
+}
+
+.cover-preview-img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.cover-preview-placeholder {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--text-muted);
+}
+
+/* =========================
+   UPLOAD BOX
+========================= */
+
+.upload-box {
+
+    width: 100%;
+
+    min-height: 120px;
+
+    border: 2px dashed var(--border);
+
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    margin-bottom: 1.5rem;
+
+    transition: 0.2s ease;
+
+    color: var(--text-muted);
+}
+
+.upload-box:hover {
+
+    border-color: var(--primary);
+
+    background: rgba(244,185,66,0.08);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.modal-btn {
+
+    width: 100%;
+}
+
+/* PREVENT BODY SCROLL */
+body.modal-open {
+
+    overflow: hidden;
+}

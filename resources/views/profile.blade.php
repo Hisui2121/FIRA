@@ -1,67 +1,233 @@
-<x-layout>
+<!-- PROFILE PHOTO MODAL -->
+<div class="modal-overlay" id="profilePhotoModal">
 
+    <div class="modern-modal">
+
+        <div class="modal-header">
+            <h3>Update Profile Photo</h3>
+
+            <button type="button"
+                    class="modal-close"
+                    onclick="closeModal('profilePhotoModal')">
+                ✕
+            </button>
+        </div>
+
+        <form action="{{ route('profile.photo.update') }}"
+              method="POST"
+              enctype="multipart/form-data">
+
+            @csrf
+            @method('PUT')
+
+            <div class="upload-preview">
+
+                @if(auth()->user()->profile_photo)
+                    <img src="{{ asset('storage/' . auth()->user()->profile_photo) }}"
+                         class="preview-avatar">
+                @else
+                    <div class="preview-avatar placeholder-avatar">
+                        {{ strtoupper(substr(auth()->user()->first_name, 0, 1)) }}
+                    </div>
+                @endif
+
+            </div>
+
+            <label class="upload-box">
+
+                <input type="file"
+                       name="profile_photo"
+                       hidden>
+
+                <span>Choose Profile Photo</span>
+
+            </label>
+
+            <button type="submit" class="btn btn-primary modal-btn">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- COVER PHOTO MODAL -->
+<div class="modal-overlay" id="coverPhotoModal">
+
+    <div class="modern-modal">
+
+        <div class="modal-header">
+            <h3>Update Cover Photo</h3>
+
+            <button type="button"
+                    class="modal-close"
+                    onclick="closeModal('coverPhotoModal')">
+                ✕
+            </button>
+        </div>
+
+        <form action="{{ route('profile.cover.update') }}"
+              method="POST"
+              enctype="multipart/form-data">
+
+            @csrf
+            @method('PUT')
+
+            <div class="cover-preview-box">
+
+                @if(auth()->user()->cover_photo)
+                    <img src="{{ asset('storage/' . auth()->user()->cover_photo) }}"
+                         class="cover-preview-img">
+                @else
+                    <div class="cover-preview-placeholder">
+                        No Cover Photo
+                    </div>
+                @endif
+
+            </div>
+
+            <label class="upload-box">
+
+                <input type="file"
+                       name="cover_photo"
+                       hidden>
+
+                <span>Choose Cover Photo</span>
+
+            </label>
+
+            <button type="submit"
+                    class="btn btn-primary modal-btn">
+
+                Save Changes
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+function openModal(id) {
+
+    document.getElementById(id).classList.add('active');
+
+    document.body.classList.add('modal-open');
+}
+
+function closeModal(id) {
+
+    document.getElementById(id).classList.remove('active');
+
+    document.body.classList.remove('modal-open');
+}
+
+/* CLOSE IF CLICK OUTSIDE */
+document.querySelectorAll('.modal-overlay').forEach(modal => {
+
+    modal.addEventListener('click', function(e) {
+
+        if(e.target === modal) {
+
+            modal.classList.remove('active');
+
+            document.body.classList.remove('modal-open');
+        }
+
+    });
+
+});
+
+</script>
+
+<x-layout>
 <x-slot:title>
     My Profile
 </x-slot:title>
 
 <div class="profile-page">
 
-    <!-- PROFILE HERO -->
+    <!-- HERO -->
     <div class="profile-hero">
 
-        <!-- COVER IMAGE -->
+        <!-- COVER -->
         <div class="profile-cover">
 
             @if(auth()->user()->cover_photo)
+
                 <img src="{{ asset('storage/' . auth()->user()->cover_photo) }}"
-                     alt="Cover Photo">
+                     alt="Cover">
+
             @else
+
                 <div class="cover-placeholder">
-                    Cover Photo
+                    No Cover Photo
                 </div>
+
             @endif
 
-            <!-- COVER UPLOAD BUTTON -->
-            <button class="cover-upload-btn">
+            <!-- COVER ACTION -->
+            <button class="cover-upload-btn"
+                    onclick="openModal('coverPhotoModal')">
                 Change Cover
             </button>
 
         </div>
 
-        <!-- PROFILE MAIN -->
+        <!-- MAIN -->
         <div class="profile-main">
 
             <!-- AVATAR -->
             <div class="profile-avatar-wrapper">
 
                 @if(auth()->user()->profile_photo)
+
                     <img src="{{ asset('storage/' . auth()->user()->profile_photo) }}"
                          class="profile-avatar-img">
+
                 @else
+
                     <div class="profile-avatar">
-                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+
+                        {{ strtoupper(substr(auth()->user()->first_name, 0, 1)) }}
+
                     </div>
+
                 @endif
 
-                <button class="avatar-upload-btn">
+                <button class="avatar-upload-btn"
+                        onclick="openModal('profilePhotoModal')">
                     Edit
                 </button>
 
             </div>
 
-            <!-- USER INFO -->
+            <!-- USER -->
             <div class="profile-user">
 
                 <div class="profile-top">
 
                     <div>
-                        <h1>{{ auth()->user()->name }}</h1>
 
-                        <p>{{ auth()->user()->email }}</p>
+                        <h1>
+                            {{ auth()->user()->full_name }}
+                        </h1>
+
+                        <p>
+                            {{ auth()->user()->email }}
+                        </p>
+
                     </div>
 
                     <div class="role-badge">
+
                         {{ ucfirst(auth()->user()->roles->first()->name) }}
+
                     </div>
 
                 </div>
@@ -75,37 +241,63 @@
     <!-- CONTENT -->
     <div class="profile-grid">
 
-        <!-- LEFT -->
+        <!-- PERSONAL -->
         <div class="profile-section">
 
             <div class="section-header">
+
                 <h3>Personal Information</h3>
-                <p>Your account details and profile information.</p>
+
+                <p>
+                    Your account and contact information.
+                </p>
+
             </div>
 
             <div class="info-list">
 
                 <div class="info-item">
                     <span>Full Name</span>
-                    <strong>{{ auth()->user()->name }}</strong>
+
+                    <strong>
+                        {{ auth()->user()->full_name }}
+                    </strong>
                 </div>
 
                 <div class="info-item">
                     <span>Email Address</span>
-                    <strong>{{ auth()->user()->email }}</strong>
-                </div>
 
-                <div class="info-item">
-                    <span>Role</span>
                     <strong>
-                        {{ ucfirst(auth()->user()->roles->first()->name) }}
+                        {{ auth()->user()->email }}
                     </strong>
                 </div>
 
                 <div class="info-item">
-                    <span>Member Since</span>
+                    <span>Phone Number</span>
+
                     <strong>
-                        {{ auth()->user()->created_at->format('F d, Y') }}
+                        {{ auth()->user()->phone_number ?? 'Not Set' }}
+                    </strong>
+                </div>
+
+                <div class="info-item">
+                    <span>Birthdate</span>
+
+                    <strong>
+
+                        {{ auth()->user()->birthdate
+                            ? auth()->user()->birthdate->format('F d, Y')
+                            : 'Not Set'
+                        }}
+
+                    </strong>
+                </div>
+
+                <div class="info-item">
+                    <span>Sex</span>
+
+                    <strong>
+                        {{ auth()->user()->sex ?? 'Not Set' }}
                     </strong>
                 </div>
 
@@ -113,31 +305,83 @@
 
         </div>
 
-        <!-- RIGHT -->
+        <!-- ADDRESS -->
         <div class="profile-section">
 
             <div class="section-header">
-                <h3>Quick Actions</h3>
-                <p>Manage your account settings.</p>
+
+                <h3>Address Information</h3>
+
+                <p>
+                    Residential address details.
+                </p>
+
             </div>
 
-            <div class="action-list">
+            <div class="info-list">
 
-                <a href="#" class="profile-action-btn primary-action">
-                    Edit Profile
-                </a>
+                <div class="info-item">
 
-                <a href="#" class="profile-action-btn secondary-action">
-                    Change Password
-                </a>
+                    <span>House No.</span>
 
-                <a href="#" class="profile-action-btn secondary-action">
-                    Upload Photo
-                </a>
+                    <strong>
+                        {{ auth()->user()->house_no ?? 'Not Set' }}
+                    </strong>
+
+                </div>
+
+                <div class="info-item">
+
+                    <span>Street</span>
+
+                    <strong>
+                        {{ auth()->user()->street ?? 'Not Set' }}
+                    </strong>
+
+                </div>
+
+                <div class="info-item">
+
+                    <span>Barangay</span>
+
+                    <strong>
+                        {{ auth()->user()->barangay ?? 'Not Set' }}
+                    </strong>
+
+                </div>
+
+                <div class="info-item">
+
+                    <span>City</span>
+
+                    <strong>
+                        {{ auth()->user()->city ?? 'Not Set' }}
+                    </strong>
+
+                </div>
 
             </div>
 
         </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="profile-actions-modern">
+
+        <a href="{{ route('settings.account')}}"
+           class="profile-action-btn primary-action">
+
+            Edit Profile
+
+        </a>
+
+        <a href="#"
+           class="profile-action-btn secondary-action">
+
+            Change Password
+
+        </a>
 
     </div>
 

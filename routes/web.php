@@ -29,6 +29,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/account', [ProfileController::class, 'update'])
         ->name('profile.update');
 
+    Route::put('/profile/photo', [ProfileController::class, 'updatePhoto'])
+    ->name('profile.photo.update');
+
+    Route::put('/profile/cover', [ProfileController::class, 'updateCover'])
+    ->name('profile.cover.update');
+
 });
 
 Route::middleware(['auth'])->prefix('settings')->group(function () {

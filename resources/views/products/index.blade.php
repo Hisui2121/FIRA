@@ -98,11 +98,12 @@
                             Stock Out
                             <div class="resize-handle"></div>
                         </th>
-
+                        @role('admin')
                         <th>
                             Actions
                             <div class="resize-handle"></div>
                         </th>
+                        @endrole
 
                     </tr>
                     </thead>
@@ -136,6 +137,7 @@
                                             <button type="submit">-</button>
                                         </form>
                                     </td>
+                                    @role('admin')
                                     <td style="position:relative;">
                                         <button onclick="toggleMenu(this)" class="btn">⋮</button>
 
@@ -159,6 +161,7 @@
                                             </div>
                                         </div>
                                     </td>
+                                    @endrole
                                 </tr>
                             @endforeach
 
