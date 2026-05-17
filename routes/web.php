@@ -12,6 +12,7 @@ use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportsController;
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
@@ -81,6 +82,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('products.stockout');
 
     Route::resource('suppliers', SupplierController::class);
+
+    Route::get('/reports', [ReportsController::class, 'index'])->name('reports.index');
 
     Route::get('/profile', function () {
         return view('profile');

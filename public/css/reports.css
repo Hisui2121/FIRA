@@ -1,0 +1,268 @@
+.reports-page {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.reports-header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #241f26;
+    margin: 0 0 0.25rem;
+}
+
+.reports-header p {
+    color: #888;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* STAT CARDS */
+.reports-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.report-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid #241f26;
+}
+
+.report-card:nth-child(2) { border-left-color: #22c55e; }
+.report-card:nth-child(3) { border-left-color: #f59e0b; }
+.report-card:nth-child(4) { border-left-color: #6366f1; }
+
+.report-card-label {
+    font-size: 0.78rem;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.report-card-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #241f26;
+}
+
+.report-card-value.suppliers  { color: #22c55e; }
+.report-card-value.low        { color: #f59e0b; }
+.report-card-value.categories { color: #6366f1; }
+
+/* CHARTS */
+.reports-charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.chart-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+
+.chart-box h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #241f26;
+    margin: 0 0 1rem;
+}
+
+/* TABLES */
+.reports-table-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+
+.reports-table-box h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #241f26;
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.badge-low {
+    background: #fff3cd;
+    color: #b45309;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.reports-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.reports-table th {
+    text-align: left;
+    padding: 0.6rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #888;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.reports-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f7f7f7;
+    color: #241f26;
+}
+
+.reports-table tr:last-child td {
+    border-bottom: none;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-badge.out {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.status-badge.low {
+    background: #fff3cd;
+    color: #b45309;
+}
+
+/* BANNER */
+.reports-banner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.banner-card {
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.banner-card.dark {
+    background: #241f26;
+    color: #fff;
+}
+
+.banner-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+}
+
+.banner-value {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* Chart box header */
+.chart-box-header {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #fff;
+    background: #fdbf29;
+    margin: -1.5rem -1.5rem 1rem -1.5rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 12px 12px 0 0;
+    text-align: center;
+}
+
+/* Empty row */
+.empty-row {
+    text-align: center;
+    color: #aaa;
+    padding: 2rem !important;
+}
+
+/* ===== HOVER EFFECTS ===== */
+
+/* Stat cards lift up */
+.report-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+}
+
+.report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* Banner cards lift up */
+.banner-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+}
+
+.banner-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* Chart boxes lift up */
+.chart-box {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+}
+
+.chart-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+/* Table rows highlight */
+.reports-table tbody tr {
+    transition: background 0.15s ease;
+    cursor: default;
+}
+
+.reports-table tbody tr:hover {
+    background: #fffbef;
+}
+
+/* Table box lift */
+.reports-table-box {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reports-table-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+/* Status badges pop on hover */
+.status-badge {
+    transition: transform 0.15s ease;
+    display: inline-block;
+}
+
+.status-badge:hover {
+    transform: scale(1.08);
+}
