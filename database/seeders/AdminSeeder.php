@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,8 +17,19 @@ class AdminSeeder extends Seeder
         $admin = User::firstOrCreate(
             ['email' => 'stephenjadec@gmail.com'],
             [
-                'name' => 'Jade',
+                // Pinalitan natin ang 'name' para sumunod sa database columns mo
+                'first_name' => 'Jade',
+                'last_name' => 'Admin',
                 'password' => Hash::make('Jade2021'),
+                
+                // Nilagyan natin ng dummy data ang iba pang required fields
+                'birthdate' => '2000-01-01',
+                'sex' => 'Male',
+                'phone_number' => '09123456789',
+                'city' => 'Taguig City',
+                'barangay' => 'New Lower Bicutan',
+                'street' => 'M.L Quezon Street',
+                'house_no' => '1',
             ]
         );
     

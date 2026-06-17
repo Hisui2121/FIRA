@@ -21,12 +21,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             SupplierSeeder::class,
+            RoleSeeder::class,
+            AdminSeeder::class
         ]);
 
         // // User::factory(10)->create();
         // $product = Product::create([
         //     'name' => 'T-Shirt',
-        //     'base_price' => 300
+        //     'price' => 300
         // ]);
       
         // ProductVariant::create([

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function create() {
-        return view('login');
+        return view('auth.login');
     }
 
     public function store(Request $request) {
@@ -18,8 +18,11 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        // Attempt to login
-        if (Auth::attempt($request->only('email', 'password'))) {
+        // I-check kung nilagyan ng check ng user yung box (magiging true o false)
+        $remember = $request->has('remember');
+
+        // Idagdag ang $remember variable bilang second parameter
+        if (Auth::attempt($request->only('email', 'password'), $remember)) {
 
             $user = Auth::user();
     
