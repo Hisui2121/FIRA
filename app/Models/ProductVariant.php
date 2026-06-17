@@ -13,6 +13,10 @@ class ProductVariant extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function stockTransactions(){
+        return $this->hasMany(StockTransaction::class, 'variant_id');
+    }
+
     public function actualPrice(){
         return $this->price_override ?? $this->product->price;
 

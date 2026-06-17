@@ -12,7 +12,9 @@ class StockTransaction extends Model
         'quantity'
     ];
 
-    public function product(){
-        return $this->belongsTo(Product::class);
+    // A stock transaction belongs to a variant (the table only has variant_id,
+    // there is no product_id column), not directly to a Product.
+    public function variant(){
+        return $this->belongsTo(ProductVariant::class, 'variant_id');
     }
 }

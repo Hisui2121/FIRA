@@ -196,7 +196,12 @@ class ProductController extends Controller
         $this->authorize('stock', $variant);
     
         $variant->increment('stock', $request->quantity);
-        
+
+        $variant->stockTransactions()->create([
+            'type' => 'IN',
+            'quantity' => $request->quantity,
+        ]);
+       
         AuditHelper::log(
             'STOCK IN',
             'Inventory',
@@ -217,6 +222,11 @@ class ProductController extends Controller
         $this->authorize('stock', $variant);
     
         $variant->decrement('stock', $request->quantity);
+
+        $variant->stockTransactions()->create([
+            'type' => 'OUT',
+            'quantity' => $request->quantity,
+        ]);
     
         AuditHelper::log(
             'STOCK OUT',

@@ -2,27 +2,30 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $admin = User::firstOrCreate(
-            ['email' => 'stephenjadec@gmail.com'],
+            ['email' => 'admin@fira.com'],
             [
-                'name' => 'Jade',
-                'password' => Hash::make('Jade2021'),
+                'first_name'   => 'Jade',
+                'last_name'    => 'Admin',
+                'password'     => Hash::make('Admin2024!'),
+                'birthdate'    => '1990-06-15',
+                'sex'          => 'Male',
+                'phone_number' => '09171000001',
+                'city'         => 'Makati City',
+                'barangay'     => 'Bel-Air',
+                'street'       => 'Ayala Avenue',
+                'house_no'     => '88',
             ]
         );
-    
+
         $admin->assignRole('admin');
     }
 }

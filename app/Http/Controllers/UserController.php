@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\ProfileController;
@@ -30,6 +31,35 @@ class UserController extends Controller
             'users' => $users,
             'roles' => Role::all(),
         ]);
+    }
+
+    public function create()
+    {
+        return view('users.create', [
+            'roles' => Role::all(),
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
+            'role' => 'required'
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->assignRole($request->role);
+
+        return redirect()
+            ->route('users.index')
+            ->with('success', 'User created successfully.');
     }
 
     public function edit(User $user)

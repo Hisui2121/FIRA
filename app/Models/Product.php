@@ -38,6 +38,13 @@ class Product extends Model
     }
 
     public function transactions(){
-        return $this->hasMany(StockTransaction::class);
+        return $this->hasManyThrough(
+            StockTransaction::class,
+            ProductVariant::class,
+            'product_id',  // FK on product_variants referencing products
+            'variant_id',  // FK on stock_transactions referencing product_variants
+            'id',          // local key on products
+            'id'           // local key on product_variants
+        );
     }
 }

@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('action'); // stock_in, stock_out, create, update, delete
             $table->string('product_name')->nullable();
+            $table->string('module')->nullable();
+            $table->string('description')->nullable();
+            $table->string('ip_address')->nullable();
             $table->integer('quantity')->nullable();
             $table->timestamps();
         });

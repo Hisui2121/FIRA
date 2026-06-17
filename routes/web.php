@@ -12,6 +12,7 @@ use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportsController;
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
@@ -88,6 +89,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('suppliers', SupplierController::class);
 
+    Route::get('/reports', [ReportsController::class, 'index'])->name('reports.index');
+
     Route::get('/profile', function () {
         return view('profile');
     })->middleware('auth')->name('profile');
@@ -111,7 +114,10 @@ Route::middleware(['auth'])->group(function () {
             ->name('products.destroy');
 
         Route::get('/audit-logs', [AuditLogController::class, 'index'])
-        ->name('audit.logs');
+        ->name('audit.index');
+        Route::delete('/audit/clear', [AuditLogController::class, 'clear'])
+        ->name('audit.clear');
+        
     });
 
     Route::post('/logout', [LoginController::class, 'destroy'])

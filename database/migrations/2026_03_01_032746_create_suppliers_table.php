@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();
             $table->string('email', 150)->nullable();
             $table->text('address')->nullable();
+            $table->string('logo')->nullable();  // consolidated from add_logo_to_suppliers_table
             $table->timestamps();
         });
     }

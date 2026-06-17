@@ -1,0 +1,648 @@
+/* ================================
+   FIRA — Reports Page
+   All colors via CSS variables —
+   dark mode works automatically.
+================================ */
+
+.rp-page {
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 1400px;
+}
+
+/* ── HEADER ─────────────────────── */
+
+.rp-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 2px solid var(--border);
+}
+
+.rp-eyebrow {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.rp-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0 0 0.2rem;
+    line-height: 1;
+}
+
+.rp-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.rp-export-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--primary);
+    color: #111;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.rp-export-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* ── FILTER BAR ─────────────────── */
+
+.rp-filter-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    box-shadow: var(--shadow);
+}
+
+.rp-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+    min-width: 140px;
+    max-width: 220px;
+}
+
+.rp-filter-label {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+}
+
+.rp-filter-select,
+.rp-filter-input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--surface-secondary);
+    color: var(--text);
+    font-size: 0.83rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 24 24' stroke='%239ca3af' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.6rem center;
+    padding-right: 2rem;
+}
+
+.rp-filter-input {
+    background-image: none;
+    padding-right: 0.75rem;
+    cursor: text;
+}
+
+.rp-filter-select:focus,
+.rp-filter-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(244,185,66,0.15);
+}
+
+.rp-filter-actions {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 1px;
+}
+
+.rp-clear-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.9rem;
+    background: var(--surface-hover);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.rp-clear-btn:hover {
+    background: rgba(239,68,68,0.08);
+    color: var(--danger);
+    border-color: rgba(239,68,68,0.3);
+}
+
+.rp-filter-count {
+    background: var(--primary);
+    color: #111;
+    font-size: 0.65rem;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── ACTIVE FILTER PILLS ────────── */
+
+.rp-active-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.rp-active-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+.rp-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.22rem 0.7rem;
+    background: rgba(244,185,66,0.12);
+    border: 1px solid rgba(244,185,66,0.3);
+    color: var(--text);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* ── SUMMARY STRIP ──────────────── */
+
+.rp-summary-strip {
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.1rem 1.75rem;
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.rp-summary-strip::-webkit-scrollbar { display: none; }
+
+.rp-summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    flex: 1;
+    min-width: 90px;
+}
+
+.rp-summary-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.rp-summary-value.rp-warn { color: var(--warning); }
+
+.rp-summary-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-soft);
+}
+
+.rp-summary-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+    flex-shrink: 0;
+    margin: 0 0.25rem;
+}
+
+/* ── SECTION LABELS ─────────────── */
+
+.rp-section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.25rem;
+}
+
+.rp-section-label span:first-child {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.rp-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* ── BADGES ─────────────────────── */
+
+.rp-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.18rem 0.6rem;
+    border-radius: 50px;
+    white-space: nowrap;
+}
+
+.rp-badge--warn    { background: rgba(245,158,11,0.12); color: var(--warning); }
+.rp-badge--neutral { background: var(--surface-secondary); color: var(--text-muted); border: 1px solid var(--border); }
+
+/* ── TWO-COLUMN LAYOUT ──────────── */
+
+.rp-two-col {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1rem;
+    align-items: start;
+}
+
+.rp-left-col,
+.rp-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rp-charts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* ── CHART CARDS ────────────────── */
+
+.rp-chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem 1.35rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rp-chart-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.09);
+}
+
+.rp-chart-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding-left: 0.7rem;
+    border-left: 3px solid var(--primary);
+}
+
+.rp-chart-wrap { position: relative; height: 190px; }
+.rp-chart-wrap--donut { height: 210px; }
+
+/* ── GENERIC CARD ───────────────── */
+
+.rp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.6rem 0.85rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.rp-card--flush { padding: 0; overflow: hidden; }
+
+/* ── SUPPLIER ROWS ──────────────── */
+
+.rp-supplier-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.4rem;
+    border-radius: 10px;
+    transition: background 0.15s ease;
+}
+
+.rp-supplier-row:hover { background: var(--surface-hover); }
+
+.rp-supplier-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.rp-supplier-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rp-supplier-meta {
+    font-size: 0.68rem;
+    color: var(--text-soft);
+}
+
+.rp-supplier-bar-wrap {
+    width: 56px;
+    height: 5px;
+    background: var(--border);
+    border-radius: 50px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.rp-supplier-bar {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 50px;
+}
+
+/* ── AVATARS ────────────────────── */
+
+.rp-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.rp-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.rp-avatar--supplier {
+    background: var(--surface-secondary);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+}
+
+.rp-avatar--sm   { width: 30px; height: 30px; border-radius: 8px; font-size: 0.72rem; }
+.rp-avatar--table { width: 32px; height: 32px; border-radius: 8px; font-size: 0.76rem; }
+
+/* ── LOW STOCK ROWS ─────────────── */
+
+.rp-low-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease;
+}
+
+.rp-low-row:last-child { border-bottom: none; }
+.rp-low-row:hover { background: var(--surface-hover); }
+
+.rp-low-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+.rp-low-name {
+    font-size: 0.81rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rp-low-meta {
+    font-size: 0.67rem;
+    color: var(--text-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── EMPTY STATES ───────────────── */
+
+.rp-empty-ok {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.1rem 1rem;
+    font-size: 0.8rem;
+    color: var(--success);
+    font-weight: 500;
+}
+
+.rp-empty-sm {
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    padding: 0.75rem;
+    text-align: center;
+}
+
+/* ── PRODUCT TABLE ──────────────── */
+
+.rp-table-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.rp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.845rem;
+}
+
+.rp-table thead tr {
+    background: var(--surface-secondary);
+    border-bottom: 1px solid var(--border);
+}
+
+.rp-table th {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-size: 0.67rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-soft);
+    white-space: nowrap;
+}
+
+.rp-table td {
+    padding: 0.72rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+}
+
+.rp-table tbody tr:last-child td { border-bottom: none; }
+.rp-table tbody tr { transition: background 0.12s ease; }
+.rp-table tbody tr:hover { background: var(--surface-hover); }
+
+.rp-product-cell { display: flex; align-items: center; gap: 0.6rem; }
+.rp-td-bold   { font-weight: 600; }
+.rp-td-muted  { color: var(--text-muted); }
+.rp-td-center { text-align: center; }
+.rp-td-mono   { font-family: 'Courier New', monospace; font-size: 0.74rem; color: var(--text-muted); }
+
+.rp-cat-tag {
+    display: inline-block;
+    padding: 0.16rem 0.55rem;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.71rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.rp-stock-bar-wrap { display: flex; align-items: center; gap: 0.5rem; }
+
+.rp-stock-bar {
+    height: 5px;
+    background: var(--primary);
+    border-radius: 50px;
+    min-width: 3px;
+    max-width: 80px;
+}
+
+.rp-status {
+    display: inline-block;
+    padding: 0.18rem 0.6rem;
+    border-radius: 50px;
+    font-size: 0.69rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.rp-status--out { background: rgba(239,68,68,0.1); color: var(--danger); }
+.rp-status--low { background: rgba(245,158,11,0.12); color: var(--warning); }
+
+.rp-empty {
+    text-align: center;
+    color: var(--text-soft);
+    padding: 2.5rem !important;
+    font-size: 0.875rem;
+}
+
+/* ── TAG LISTS (sizes & colors) ─── */
+
+.rp-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.rp-tag {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.rp-color-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+    padding: 0.15rem 0.5rem 0.15rem 0.3rem;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.rp-color-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.12);
+    flex-shrink: 0;
+}
+
+/* ── PRINT ──────────────────────── */
+
+@media print {
+    .sidebar, .navbar, .rp-export-btn, .rp-filter-bar, .rp-active-filters { display: none !important; }
+    .rp-page { padding: 0; }
+    .rp-two-col { grid-template-columns: 1fr 280px; }
+    .rp-chart-card, .rp-table-card, .rp-card { box-shadow: none; }
+}
+
+/* ── RESPONSIVE ─────────────────── */
+
+@media (max-width: 1100px) {
+    .rp-two-col { grid-template-columns: 1fr; }
+    .rp-filter-group { max-width: 100%; }
+}
+
+@media (max-width: 768px) {
+    .rp-page { padding: 1rem; }
+    .rp-header { flex-direction: column; align-items: flex-start; }
+    .rp-title { font-size: 1.5rem; }
+    .rp-filter-bar { gap: 0.6rem; }
+    .rp-filter-group { min-width: 100%; max-width: 100%; }
+    .rp-charts-row { grid-template-columns: 1fr; }
+}
