@@ -1,0 +1,476 @@
+/* ---------- Page Header ---------- */
+.cat-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.75rem;
+}
+ 
+.cat-header__titles h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.25rem 0;
+    letter-spacing: -0.01em;
+}
+ 
+.cat-header__titles p {
+    font-size: 0.875rem;
+    color: #8a8a8a;
+    margin: 0;
+}
+ 
+/* ---------- Buttons ---------- */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #f0a500;
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+    white-space: nowrap;
+}
+ 
+.btn-primary:hover {
+    background-color: #d99200;
+    color: #1a1a1a;
+    text-decoration: none;
+}
+ 
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 8px;
+    border: 1.5px solid #d8d8d8;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+    white-space: nowrap;
+}
+ 
+.btn-secondary:hover {
+    background-color: #f5f5f5;
+    border-color: #bbb;
+    color: #1a1a1a;
+    text-decoration: none;
+}
+ 
+.btn-danger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #fff0f0;
+    color: #c0392b;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1.5px solid #f5c6c6;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+    white-space: nowrap;
+}
+ 
+.btn-danger:hover {
+    background-color: #ffe0e0;
+    color: #c0392b;
+    text-decoration: none;
+}
+ 
+/* ---------- Filter / Search Card ---------- */
+.cat-filter-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+ 
+.cat-filter-card .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+    min-width: 200px;
+}
+ 
+.cat-filter-card label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #8a8a8a;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+ 
+.cat-filter-card input[type="text"],
+.cat-filter-card select {
+    height: 42px;
+    padding: 0 0.875rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #1a1a1a;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.15s ease;
+    width: 100%;
+}
+ 
+.cat-filter-card input[type="text"]:focus,
+.cat-filter-card select:focus {
+    border-color: #f0a500;
+    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.12);
+}
+ 
+.cat-filter-card .filter-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+    padding-bottom: 0;
+}
+ 
+/* ---------- Table Card ---------- */
+.cat-table-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    overflow: hidden;
+}
+ 
+.cat-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+ 
+.cat-table thead tr {
+    border-bottom: 1px solid #eee;
+}
+ 
+.cat-table thead th {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #8a8a8a;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: left;
+    background: #fff;
+    white-space: nowrap;
+}
+ 
+.cat-table thead th a {
+    color: #8a8a8a;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+ 
+.cat-table thead th a:hover {
+    color: #1a1a1a;
+}
+ 
+.cat-table thead th.sorted a {
+    color: #f0a500;
+}
+ 
+.cat-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.1s ease;
+}
+ 
+.cat-table tbody tr:last-child {
+    border-bottom: none;
+}
+ 
+.cat-table tbody tr:hover {
+    background-color: #fafafa;
+}
+ 
+.cat-table tbody td {
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+    color: #2d2d2d;
+    vertical-align: middle;
+}
+ 
+.cat-table td.cat-name {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+ 
+.cat-table td.cat-desc {
+    color: #666;
+    max-width: 300px;
+}
+ 
+.cat-table td.cat-count {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+ 
+.cat-table .cat-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+ 
+.cat-table .action-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+}
+ 
+.cat-table .action-link.edit {
+    color: #1a1a1a;
+    background: #f0f0f0;
+    border: 1px solid #e0e0e0;
+}
+ 
+.cat-table .action-link.edit:hover {
+    background: #e4e4e4;
+}
+ 
+.cat-table .action-link.delete {
+    color: #c0392b;
+    background: #fff0f0;
+    border: 1px solid #f5c6c6;
+}
+ 
+.cat-table .action-link.delete:hover {
+    background: #ffe0e0;
+}
+ 
+/* ---------- Badge: Product Count ---------- */
+.badge-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    color: #555;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    border: 1px solid #e8e8e8;
+    min-width: 32px;
+}
+ 
+/* ---------- Empty State ---------- */
+.cat-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #8a8a8a;
+}
+ 
+.cat-empty svg {
+    margin-bottom: 1rem;
+    opacity: 0.35;
+}
+ 
+.cat-empty p {
+    font-size: 0.9rem;
+    margin: 0.25rem 0 1rem;
+}
+ 
+.cat-empty strong {
+    font-size: 1rem;
+    color: #444;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+ 
+/* ---------- Flash Alerts ---------- */
+.cat-alert {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.125rem;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+}
+ 
+.cat-alert.success {
+    background: #edfaf3;
+    color: #1a7f4b;
+    border: 1px solid #b8efd4;
+}
+ 
+.cat-alert.error {
+    background: #fff0f0;
+    color: #c0392b;
+    border: 1px solid #f5c6c6;
+}
+ 
+/* ---------- Form Card (create / edit) ---------- */
+.cat-form-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 640px;
+}
+ 
+.cat-form-card .form-group {
+    margin-bottom: 1.25rem;
+}
+ 
+.cat-form-card label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+}
+ 
+.cat-form-card input[type="text"],
+.cat-form-card textarea {
+    width: 100%;
+    padding: 0.65rem 0.875rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.15s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+ 
+.cat-form-card input[type="text"]:focus,
+.cat-form-card textarea:focus {
+    border-color: #f0a500;
+    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.12);
+}
+ 
+.cat-form-card textarea {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.55;
+}
+ 
+.cat-form-card .field-hint {
+    font-size: 0.78rem;
+    color: #999;
+    margin-top: 0.3rem;
+}
+ 
+.cat-form-card .field-error {
+    font-size: 0.78rem;
+    color: #c0392b;
+    margin-top: 0.3rem;
+}
+ 
+.cat-form-card input.has-error,
+.cat-form-card textarea.has-error {
+    border-color: #e74c3c;
+}
+ 
+.cat-form-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f0f0f0;
+}
+ 
+/* ---------- Pagination ---------- */
+.cat-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid #f0f0f0;
+    font-size: 0.8rem;
+    color: #777;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+ 
+.cat-pagination .pagination-links a,
+.cat-pagination .pagination-links span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #555;
+    transition: background-color 0.12s ease;
+}
+ 
+.cat-pagination .pagination-links a:hover {
+    background: #f5f5f5;
+}
+ 
+.cat-pagination .pagination-links span.active {
+    background: #f0a500;
+    color: #fff;
+    border-color: #f0a500;
+}
+ 
+.cat-pagination .pagination-links span.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+ 
+/* ---------- Breadcrumb ---------- */
+.cat-breadcrumb {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+ 
+.cat-breadcrumb a {
+    color: #999;
+    text-decoration: none;
+}
+ 
+.cat-breadcrumb a:hover {
+    color: #f0a500;
+}
+ 
+.cat-breadcrumb .sep {
+    color: #ccc;
+}
+ 
+.cat-breadcrumb .current {
+    color: #444;
+    font-weight: 600;
+}
