@@ -6,6 +6,8 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Models\Product;
 use App\Policies\ProductPolicy;
+use App\Models\Category;
+use App\Policies\CategoryPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,8 @@ class AuthServiceProvider extends ServiceProvider
      * Policy mappings
      */
     protected $policies = [
-        Product::class => ProductPolicy::class,
+        Product::class  => ProductPolicy::class,
+        Category::class => CategoryPolicy::class,
     ];
 
     public function boot(): void

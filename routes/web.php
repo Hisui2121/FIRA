@@ -13,6 +13,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\CategoryController;
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
@@ -35,6 +36,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('/profile/cover', [ProfileController::class, 'updateCover'])
     ->name('profile.cover.update');
+
+    Route::get('/categories', [CategoryController::class, 'index'])
+        ->name('categories.index');
 
 });
 
@@ -118,6 +122,22 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/audit/clear', [AuditLogController::class, 'clear'])
         ->name('audit.clear');
         
+        Route::get('/categories/create', [CategoryController::class, 'create'])
+        ->name('categories.create');
+ 
+    Route::post('/categories', [CategoryController::class, 'store'])
+        ->name('categories.store');
+ 
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])
+        ->name('categories.edit');
+ 
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])
+        ->name('categories.update');
+ 
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
+        ->name('categories.destroy');
+
+
     });
 
     Route::post('/logout', [LoginController::class, 'destroy'])
